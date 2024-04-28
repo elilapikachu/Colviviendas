@@ -1,0 +1,35 @@
+@import "./index_admin.css";
+
+/* aqui importo los css correspondientes */
+
+footer {
+    background:  #cecdcd;
+    padding: 60px 0 30px 0;
+    margin: auto;
+    overflow: hidden;
+}
+
+.contenedor__fooder {
+    display: flex;
+    width: 90%;
+    justify-content: space-evenly;
+    margin: auto;
+    padding-bottom: 0.625rem;
+    border-bottom: 1px solid  #333;
+}
+
+.contenedor__info {
+    color: black;
+    border-bottom: 1px solid white;
+    padding-bottom: 0.313rem;
+    margin-bottom: 0.625rem;
+}
+
+.contenedor__info p {
+    color: black;
+}
+
+.contenedor__info img {
+    width: 90%;
+    height: 6dvh;
+}

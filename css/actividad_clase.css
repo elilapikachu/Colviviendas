@@ -1,0 +1,28 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.letrero{
+    background-color: black;
+    text-align: center;
+    color: antiquewhite;
+    margin: 15px 20px;
+}
+
+table{
+    margin: 15px 20px;
+    font-size: 20px;
+    border:  1px solid antiquewhite;
+    color: antiquewhite;
+    text-align: center;
+}
+
+tr{
+    
+    background-color: rgb(7, 7, 56);
+    /*border:  1px solid antiquewhite;*/
+}
+td{
+    background-color: black;
+   /* border:  1px solid antiquewhite;*/
+}

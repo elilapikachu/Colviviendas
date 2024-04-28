@@ -1,0 +1,71 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+
+.letrero {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100px;
+    background-color: #cecdcd;
+
+}
+.letrero__contenido{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.letrero__tittle{
+    font-size: 30px;
+    color: #333;
+}
+
+.letrero__subtittle{
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+}
+
+.button-box{
+    width: 100%;
+    height: 400px;
+    background: url('../imgs/amplia-toma-vertical-bella-arquitectura-ciudad-urbana-dia-soleado.jpg')no-repeat;
+    background-position: end;
+    background-size: cover;
+}
+
+.button-box2{
+    display: flex;
+    align-items: center;
+}
+
+.button-container {
+    margin-top: 50px;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    gap: 70px;
+
+    /* margin: 20px 0; */
+}
+
+.button-container button {
+    background-color: #666;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.button-container button:hover {
+    background-color: #333;
+}
