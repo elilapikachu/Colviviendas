@@ -35,7 +35,7 @@
 
     <h1>Insertar nueva Persona</h1>
     <div class="container__boton">
-        <a href="Persona.php">Devolver a Persona</a>
+        <a href="../read/Persona.php">Devolver a Persona</a>
     </div>
     <form action="insertar_persona.php" method="POST">
       <?php 

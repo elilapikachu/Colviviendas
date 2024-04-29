@@ -19,7 +19,7 @@
       <div class="button-box2">
       <div class="button-container">
         <a href="Persona.php"><button>Persona</button></a>
-        <a href="pagina_de_metodo_pago.php"><button>Metodo_pago</button></a>
+        <a href="pagina_de_metodo_pago.php"><button>Metodo de pago</button></a>
         <a href="pagina_de_estado.php"><button>Estado</button></a>
       </div>
       <div class="button-container">
@@ -43,7 +43,7 @@
             </div>
             <div class="contenedor__info">
                 <h4>Pinterest</h4>
-                <img src="./Colviviendas/imgs/pinterest.png" alt="">
+                <img src="../imgs/pinterest.png" alt="">
             </div>
             <div class="contenedor__info">
                 <h4>Email</h4>
@@ -51,11 +51,11 @@
             </div>
             <div class="contenedor__info">
                 <h4>Facebook</h4>
-                <img src="./Colviviendas/imgs/facebook.png" alt="red social">
+                <img src="../imgs/facebook.png" alt="red social">
             </div>
             <div class="contenedor__info">
                 <h4>Instagram</h4>
-                <img src="./Colviviendas/imgs/instagram.png" alt="red social">
+                <img src="../imgs/instagram.png" alt="red social">
             </div>
         </div>
   </footer>
