@@ -27,7 +27,7 @@
         echo "<input type='int' id='precio' name='precio' value=''>";
         ?>
 
-      <input type="submit" value="Insertar tipo de Persona">
+      <input type="submit" value="Insertar venta de propiedad">
     </form>
     
 </body>
