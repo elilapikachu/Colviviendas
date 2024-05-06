@@ -88,7 +88,7 @@
           <a href="botones.php" class="container__boton-volver-text">Volver</a>
         </div> 
         <div class="container__boton-insertar">
-         <a href="../Insert/insertar_forma.php" class="container__boton-insertar-text">Insertar</a>
+         <a href="../Insert/insert_tipo_persona-forma.php" class="container__boton-insertar-text">Insertar</a>
         </div>
       </div>
     </div> 

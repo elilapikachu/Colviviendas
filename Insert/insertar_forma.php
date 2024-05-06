@@ -3,34 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/insert.css">
     <title>Insertar Persona</title>
 </head>
-<style>
-    
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-    background-color: #01E5D4;
-            }
-    th {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-    background-color:chartreuse;
-
-            }
-
-        
-
-    tr:hover {background-color: aqua;}
-
-    </style>
 <body>
 
     <h1>Insertar nueva Persona</h1>

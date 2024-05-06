@@ -52,7 +52,7 @@ try{
 $error= $e->getCode();
 
 if ($error==23000){
-  echo '<script>confirmar=confirm("Ese codigo de pais ya existe");
+  echo '<script>confirmar=confirm("Ese codigo de Persona ya existe");
           if (confirmar)
             window.location.href="insertar_forma.php";</script>';
           echo "<a href= insertar_forma.php>Volver</a>";
