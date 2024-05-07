@@ -105,7 +105,7 @@
 
     $selected = mysqli_select_db ($dbhandle, 'colviviendas') or die("No se encontro el esquema");
 
-    $matriz = mysqli_query($dbhandle, "select a.identificacion, a.nombre, a.apellido, a.direccion, a.telefono, b.descripcion, a.fecha_registro, c.descripcion as tipo_persona, a.contrasena, a.correo from persona a, ciudad b, tipo_persona c where a.ciudad = b.codigo_ciudad AND c.codigo_tipo = a.tipo_persona;");
+    $matriz = mysqli_query($dbhandle, "select a.identificacion, a.nombre, a.apellido, a.direccion, a.telefono, b.descripcion, a.fecha_registro, c.descripcion as tipo_persona, a.contrasena, a.correo, a.foto from persona a, ciudad b, tipo_persona c where a.ciudad = b.codigo_ciudad AND c.codigo_tipo = a.tipo_persona;");
 
     //primera fila
     echo "<table>";
@@ -119,8 +119,9 @@
         <th>Ciudad</th>
         <th>Fecha de Registro</th>
         <th>Tipo de persona</th>
-        <th>contraseña</th>
-        <th>correo</th>
+        <th>Contraseña</th>
+        <th>Correo</th>
+        <th>Foto</th>
      </tr>";
     
       //Segunda Fila en adelante
@@ -138,6 +139,9 @@
             echo "<td>".$row['tipo_persona']."</td>";
             echo "<td>".$row['contrasena']."</td>";
             echo "<td>".$row['correo']."</td>";
+            echo "<td>"; 
+            echo "<img src='".$row['foto']."' width='100' >";
+            echo "</td>";
             echo "</tr>";
         
          

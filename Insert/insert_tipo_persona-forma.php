@@ -12,7 +12,7 @@
     <div class="container__boton">
         <a href="../read/pagina_de_tipo_persona.php">Devolver a Tipo Persona</a>
     </div>
-    <form action="insertar_tipo_persona.php" method="POST">
+    <form action="insert_tipo_persona.php" method="POST">
       <?php 
         echo '<label for="codigo" >Codigo del tipo</label>';
         echo "<input type='text' id='codigo' name='codigo' value=''>";
