@@ -119,6 +119,8 @@
             echo "<tr>";
             echo "<td>".$row['codigo_motivo']."</td>";
             echo "<td>".$row['descripcion']."</td>";
+            echo "<td><a href='../update/persona_edit.php' ?codigo= '".$row['codigo_motivo']."'>Editar</a></td>";
+            echo "<td><a href=''>Eliminar</a></td>";
            
          }  
     

@@ -127,6 +127,8 @@
             echo "<td>".$row['precio']."</td>";
             echo "<td>".$row['precio_final']."</td>";
             echo "</tr>";
+            echo "<td><a href='../update/persona_edit.php' ?codigo= '".$row['nro_venta']."'>Editar</a></td>";
+            echo "<td><a href=''>Eliminar</a></td>";
          }  
     
     

@@ -148,6 +148,8 @@
             echo "<td>".$row['edad']."</td>";
             echo "<td>".$row['destinacion']."</td>";
             echo "</tr>";
+            echo "<td><a href='../update/persona_edit.php' ?codigo= '".$row['codigo_propiedad']."'>Editar</a></td>";
+            echo "<td><a href=''>Eliminar</a></td>";
            
          }  
     

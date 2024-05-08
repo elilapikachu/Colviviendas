@@ -143,8 +143,9 @@
             echo "<img src='".$row['foto']."' width='100' >";
             echo "</td>";
             echo "</tr>";
+            echo "<td><a href='../update/persona_edit.php?codigo=".$row['identificacion']."'>Editar</a></td>";
+            echo "<td><a href=''>Eliminar</a></td>";
         
-         
           }  
     
     

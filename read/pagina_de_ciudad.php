@@ -118,6 +118,8 @@
             echo "<tr>";
             echo "<td>".$row['codigo_ciudad']."</td>";
             echo "<td>".$row['descripcion']."</td>";
+            echo "<td><a href='../update/ciudad_edit.php' ?codigo= '".$row['codigo_ciudad']."'>Editar</a></td>";
+            echo "<td><a href=''>Eliminar</a></td>";
            
          }  
     
