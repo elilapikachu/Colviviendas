@@ -15,12 +15,23 @@
     <form action="../read/pagina_de_motivo.php" method="POST">
       <?php 
         $vcodigo = filter_var($_GET['codigo']);
+        $mysql_host = 'localhost';
+        $mysql_user = 'root';
+        $password = '';
+    
+        $dbhandle = mysqli_connect ($mysql_host, $mysql_user, $password) or die('Problemas de conexión con DB');
+    
+        $selected = mysqli_select_db ($dbhandle, 'colviviendas') or die("No se encontro el esquema");
+    
+        $matriz = mysqli_query($dbhandle, "select * from motivo_cita;");
+
+        while ($row = mysqli_fetch_array($matriz, MYSQLI_ASSOC)) {  
         echo '<label for="codigo" >Codigo del motivo</label>';
-        echo "<input type='text' id='codigo' name='codigo' value=''>";
+        echo "<input type='text' id='codigo' name='codigo' value='".$vcodigo."' readonly>";
 
         echo '<label for="descripcion">Descripción del motivo</label>';
-        echo "<input type='text' id='descripcion' name='descripcion' value=''>";
-
+        echo "<input type='text' id='descripcion' name='descripcion' value='".$row['descripcion']."'>";
+        }
         
         ?>
 

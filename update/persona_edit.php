@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Persona</title>
 </head>
+
 <body>
-    
-<h1>Editar Persona</h1>
+
+    <h1>Editar Persona</h1>
     <div class="container__boton">
         <a href="../read/Persona.php">Devolver a Persona</a>
     </div>
-    <form action= "#" method="POST">
-      <?php 
+    <form action="#" method="POST">
+        <?php 
       $vcodigo = filter_var($_GET['codigo']);
 
       $mysql_host = 'localhost';
@@ -61,7 +63,8 @@
     
         ?>
 
-      <input type="submit" value="Actualizar Persona">
+        <input type="submit" value="Actualizar Persona">
     </form>
 </body>
+
 </html>

@@ -4,70 +4,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/actividad_clase.css">
-    <title>Colviviendad</title>
+    <title>Editar Persona</title>
 </head>
 
 <body>
-    <div class="letrero">
-        <h1>Bienvenido a Persona.</h1>
-        <h2>Colvivienda</h2>
+
+    <h1>Editar Persona</h1>
+    <div class="container__boton">
+        <a href="../read/Persona.php">Devolver a Persona</a>
     </div>
-    <?php 
-    $mysql_host = 'localhost';
-    $mysql_user = 'root';
-    $password = '';
+    <form action="#" method="POST">
+        <?php 
+      $vcodigo = filter_var($_GET['codigo']);
 
-    $dbhandle = mysqli_connect ($mysql_host, $mysql_user, $password) or die('Problemas de conexión con DB');
+      $mysql_host = 'localhost';
+      $mysql_user = 'root';
+      $password = '';
 
-    $selected = mysqli_select_db ($dbhandle, 'tumama') or die("No se encontro el esquema");
+      $dbhandle = mysqli_connect ($mysql_host, $mysql_user, $password) or die('Problemas de conexión con DB');
 
-    $matriz = mysqli_query($dbhandle, "select * from persona;");
+      $selected = mysqli_select_db ($dbhandle, 'colviviendas') or die("No se encontro el esquema");
 
-    //primera fila
-    echo "<table>";
-    echo "
-      <tr>
-        <th>Identificación</th>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Dirección</th>
-        <th>Telefono</th>
-        <th>Ciudad</th>
-        <th>Fecha de Registro</th>
-        <th>Tipo de persona</th>
-        <th>contrasena</th>
-        <th>correo</th>
-     </tr>";
-    
-      //Segunda Fila en adelante
-        
+      $matriz = mysqli_query($dbhandle, "select a.identificacion, a.nombre, a.apellido, a.direccion, a.telefono, b.descripcion, a.fecha_registro, c.descripcion as tipo_persona, a.contrasena, a.correo, a.foto from persona a, ciudad b, tipo_persona c where a.ciudad = b.codigo_ciudad AND c.codigo_tipo = a.tipo_persona AND a.identificacion =".$vcodigo.";");
+
       while ($row = mysqli_fetch_array($matriz, MYSQLI_ASSOC)) {  
+        echo '<label for="identificacion" >Numero de identificación</label>';
+        echo "<input type='text' id='identificacion' name='identificacion' value='".$vcodigo."' readonly>";
 
-            echo "<tr>";
-            echo "<td>".$row['identificacion']."</td>";
-            echo "<td>".$row['nombre']."</td>";
-            echo "<td>".$row['apellido']."</td>";
-            echo "<td>".$row['direccion']."</td>";
-            echo "<td>".$row['telefono']."</td>";
-            echo "<td>".$row['ciudad']."</td>";
-            echo "<td>".$row['fecha_registro']."</td>";
-            echo "<td>".$row['tipo_persona']."</td>";
-            echo "<td>".$row['contrasena']."</td>";
-            echo "<td>".$row['correo']."</td>";
-            echo "</tr>";
-        
-         
-          }  
+        echo '<label for="Nombre">Nombre</label>';
+        echo "<input type='text' id='nombre' name='nombre' value='".$row['nombre']."'>";
+
+        echo '<label for="Apellido" >Apellido</label>';
+        echo "<input type='text' id='apellido' name='apellido' value='".$row['apellido']."'>";
+
+        echo '<label for="Direccion" >Dirección</label>';
+        echo "<input type='text' id='direccion' name='direccion' value='".$row['direccion']."'>";
+
+        echo '<label for="telefono" >Telefono</label>';
+        echo "<input type='text' id='telefono' name='telefono' value='".$row['telefono']."'>";
+
+        echo '<label for="ciudad" >Ciudad</label>';
+        echo "<input type='text' id='ciudad' name='ciudad' value='".$row['descripcion']."'>";
+
+        echo '<label for="fecha" >fecha de registro</label>';
+        echo "<input type='text' id='fecha' name='fecha' value='".$row['fecha_registro']."' readonly>";
+
+        echo '<label for="tipo" >Tipo de persona</label>';
+        echo "<input type='text' id='tipo' name='tipo' value='".$row['tipo_persona']."'>";
+
+        echo '<label for="contraseña" >Contraseña</label>';
+        echo "<input type='password' id='contrasena' name='contrasena' value='".$row['contrasena']."'>";
+
+        echo '<label for="Email" >Correo electronico</label>';
+        echo "<input type='Email' id='email' name='email' value='".$row['correo']."'>";
+
+        }
+
     
-    
-    echo "</table>";
-    
-    
-    
-    
-    
-    ?>
+        ?>
+
+        <input type="submit" value="Actualizar Persona">
+    </form>
 </body>
 
 </html>
