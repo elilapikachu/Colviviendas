@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/insert.css">
     <title>Editar Persona</title>
 </head>
 
@@ -13,8 +14,10 @@
     <div class="container__boton">
         <a href="../read/Persona.php">Devolver a Persona</a>
     </div>
-    <form action="#" method="POST">
+    <form action="persona_edit-sql.php" method="POST" enctype="multipart/form-data">
         <?php 
+      include_once "../modulo/conexion.php";
+
       $vcodigo = filter_var($_GET['codigo']);
 
       $mysql_host = 'localhost';
@@ -44,13 +47,47 @@
         echo "<input type='text' id='telefono' name='telefono' value='".$row['telefono']."'>";
 
         echo '<label for="ciudad" >Ciudad</label>';
-        echo "<input type='text' id='ciudad' name='ciudad' value='".$row['descripcion']."'>";
+        // echo "<input type='text' id='ciudad' name='ciudad' value=''>";
+
+        try {
+          // Ejecutando sql
+         
+          $matriz1 = $conexion->query("select * from ciudad Order by codigo_ciudad");
+          
+          echo "<select id=ciudad name=ciudad>";        
+          while ($row1 = $matriz1->fetch()) {
+          echo "<option value=".$row1['codigo_ciudad'].">".$row1['codigo_ciudad']." - ".$row1['descripcion']."</option>";
+          }
+        }       
+        catch (PDOException $e) {
+        //Casa de que ocurra algun error
+        echo "Fallo el select ".$e->getMessage();
+        }
+
+        echo "</select>";
+
 
         echo '<label for="fecha" >fecha de registro</label>';
-        echo "<input type='text' id='fecha' name='fecha' value='".$row['fecha_registro']."' readonly>";
+        echo "<input type='datetime-local' id='fecha' name='fecha'  value='".$row['fecha_registro']."'>";
 
         echo '<label for="tipo" >Tipo de persona</label>';
-        echo "<input type='text' id='tipo' name='tipo' value='".$row['tipo_persona']."'>";
+        // echo "<input type='text' id='tipo' name='tipo' value=''>";
+        try {
+          // Ejecutando sql
+         
+          $matriz1 = $conexion->query("select * from tipo_persona Order by codigo_tipo");
+          
+          echo "<select id=tipo name=tipo>";        
+          while ($row1 = $matriz1->fetch()) {
+          echo "<option value=".$row1['codigo_tipo'].">".$row1['codigo_tipo']." - ".$row1['descripcion']."</option>";
+          }
+        }       
+        catch (PDOException $e) {
+        //Casa de que ocurra algun error
+        echo "Fallo el select ".$e->getMessage();
+        }
+
+        echo "</select>";
 
         echo '<label for="contraseña" >Contraseña</label>';
         echo "<input type='password' id='contrasena' name='contrasena' value='".$row['contrasena']."'>";
@@ -58,12 +95,14 @@
         echo '<label for="Email" >Correo electronico</label>';
         echo "<input type='Email' id='email' name='email' value='".$row['correo']."'>";
 
+        echo '<label for="foto" >Foto</label>';
+        echo "<input type='file' id='foto' name='foto' value=''>";
         }
 
     
         ?>
 
-        <input type="submit" value="Actualizar Persona">
+        <input type="submit" value="Modificar">
     </form>
 </body>
 

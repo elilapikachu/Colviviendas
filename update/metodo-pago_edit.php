@@ -12,7 +12,7 @@
     <div class="container__boton">
         <a href="../read/pagina_de_metodo_pago.php">Devolver a metodo de pago</a>
     </div>
-    <form action="../read/pagina_de_metodo_pago.php" method="POST">
+    <form action="metodo-pago_edit_sql.php" method="POST">
       <?php 
         $vcodigo = filter_var($_GET['codigo']);
         $mysql_host = 'localhost';
@@ -23,7 +23,7 @@
     
         $selected = mysqli_select_db ($dbhandle, 'colviviendas') or die("No se encontro el esquema");
     
-        $matriz = mysqli_query($dbhandle, "select * from metodo_pago;");
+        $matriz = mysqli_query($dbhandle, "select * from metodo_pago where codigo_metodo ='".$vcodigo.";");
 
         while ($row = mysqli_fetch_array($matriz, MYSQLI_ASSOC)) {  
 
@@ -37,7 +37,7 @@
         
         ?>
 
-      <input type="submit" value="Modificar Metodo de Pago">
+      <input type="submit" value="Modificar">
     </form>
     
 </body>

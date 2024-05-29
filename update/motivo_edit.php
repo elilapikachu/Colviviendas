@@ -4,17 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/insert.css">
-    <title>Insertar Motivo</title>
+    <title>Editar Motivo</title>
 </head>
 <body>
 
-    <h1>Insertar nuevo motivo</h1>
+    <h1>Editar motivo</h1>
     <div class="container__boton">
         <a href="../read/pagina_de_motivo.php">Devolver a Motivo</a>
     </div>
-    <form action="../read/pagina_de_motivo.php" method="POST">
+    <form action="motivo_edit-sql.php" method="POST">
       <?php 
         $vcodigo = filter_var($_GET['codigo']);
+
         $mysql_host = 'localhost';
         $mysql_user = 'root';
         $password = '';
@@ -23,7 +24,7 @@
     
         $selected = mysqli_select_db ($dbhandle, 'colviviendas') or die("No se encontro el esquema");
     
-        $matriz = mysqli_query($dbhandle, "select * from motivo_cita;");
+        $matriz = mysqli_query($dbhandle, "select * from motivo_cita where codigo_motivo = '".$vcodigo."';");
 
         while ($row = mysqli_fetch_array($matriz, MYSQLI_ASSOC)) {  
         echo '<label for="codigo" >Codigo del motivo</label>';
@@ -35,7 +36,7 @@
         
         ?>
 
-      <input type="submit" value="Insertar Motivo">
+      <input type="submit" value="Modificar">
     </form>
     
 </body>

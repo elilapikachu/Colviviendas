@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/insert.css">
-    <title>Insertar Estado</title>
+    <title>Editar Estado</title>
 </head>
 <body>
 
@@ -12,7 +12,7 @@
     <div class="container__boton">
         <a href="../read/pagina_de_estado.php">Devolver a Estado</a>
     </div>
-    <form action="../read/pagina_de_estado.php" method="POST">
+    <form action="estado-edit_sql.php" method="POST">
       <?php 
         $vcodigo = filter_var($_GET['codigo']);
 
@@ -24,7 +24,7 @@
     
         $selected = mysqli_select_db ($dbhandle, 'colviviendas') or die("No se encontro el esquema");
     
-        $matriz = mysqli_query($dbhandle, "select * from estado;");
+        $matriz = mysqli_query($dbhandle, "select * from estado where codigo_estado ='".$vcodigo."' ;");
 
         while ($row = mysqli_fetch_array($matriz, MYSQLI_ASSOC)) {  
 
@@ -37,7 +37,7 @@
         
         ?>
 
-      <input type="submit" value="Modificar Estado">
+      <input type="submit" value="Modificar">
     </form>
     
 </body>

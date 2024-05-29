@@ -6,70 +6,16 @@
     <link rel="stylesheet" href="../css/reads.css">
     <title>Venta propiedad</title>
 </head>
-<style>
-  .container__img{
-    width: 30px;
-    height: 30px;
-    margin-left: 5px;
-}  
-
-.container__boton {
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
-
-}
-
-
-.container__boton-volver {
-  text-align: center;
-    height: 30px;
-    width: 100px;
-    background-color: #636161;
-    border-radius: 15px;
-}
-
-.container__boton-insertar {
-    text-align: center;
-    height: 30px;
-    width: 100px;
-    text-decoration: none;
-    background-color: #131212;
-    border-radius: 15px;
-}
-
-.container__boton-volver-text {
-    text-align: center;
-    color: #000000;
-    text-decoration: none;
-}
-
-.container__boton-insertar-text {
-    text-align: center;
-    color: aliceblue;
-    text-decoration: none;
-}
-
-.container__boton-volver-text:hover {
-    color: aliceblue;
-}
-
-.container__boton-volver:hover {
-    background-color: #131212;
-}
-
-
-.container__boton-insertar:hover {
-    background-color: #636161;
-}
-
-.container__boton-insertar-text:hover{
-    color: #000000;
-}
-
-
-</style>
 <body>
+<script>
+      function preguntar(codigo, codigo2){
+
+          eliminar=confirm("¿Deseas eliminar este registro?");
+
+      if (eliminar)
+        window.location.href="../delete/eliminar_venta_propiedad.php?codigo="+codigo+"?codigo2="+codigo2;
+      }
+      </script> 
 <div class="letrero"><h1>Bienvenido a Venta de propiedad.</h1>
     <h2>Colvivienda</h2>
 </div>
@@ -127,8 +73,8 @@
             echo "<td>".$row['precio']."</td>";
             echo "<td>".$row['precio_final']."</td>";
             echo "</tr>";
-            echo "<td><a href='../update/persona_edit.php' ?codigo= '".$row['nro_venta']."'>Editar</a></td>";
-            echo "<td><a href=''>Eliminar</a></td>";
+            echo "<td><a href='../update/venta-propiedad.php?codigo=".$row['nro_venta']."'>Editar</a></td>";
+            echo "<td><a href='javascript:preguntar(\"".$row['nro_venta'].",".$row['codigo_propiedad']."\")'>Eliminar</a></td>";
          }  
     
     

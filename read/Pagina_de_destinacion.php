@@ -6,70 +6,16 @@
     <link rel="stylesheet" href="../css/reads.css">
     <title>Destinación</title>
 </head>
-<style>
-  .container__img{
-    width: 30px;
-    height: 30px;
-    margin-left: 5px;
-}  
-
-.container__boton {
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
-
-}
-
-
-.container__boton-volver {
-  text-align: center;
-    height: 30px;
-    width: 100px;
-    background-color: #636161;
-    border-radius: 15px;
-}
-
-.container__boton-insertar {
-    text-align: center;
-    height: 30px;
-    width: 100px;
-    text-decoration: none;
-    background-color: #131212;
-    border-radius: 15px;
-}
-
-.container__boton-volver-text {
-    text-align: center;
-    color: #000000;
-    text-decoration: none;
-}
-
-.container__boton-insertar-text {
-    text-align: center;
-    color: aliceblue;
-    text-decoration: none;
-}
-
-.container__boton-volver-text:hover {
-    color: aliceblue;
-}
-
-.container__boton-volver:hover {
-    background-color: #131212;
-}
-
-
-.container__boton-insertar:hover {
-    background-color: #636161;
-}
-
-.container__boton-insertar-text:hover{
-    color: #000000;
-}
-
-
-</style>
 <body>
+<script>
+      function preguntar(codigo){
+
+          eliminar=confirm("¿Deseas eliminar este registro?");
+
+      if (eliminar)
+        window.location.href="../delete/eliminar_destinacion.php?codigo="+codigo;
+      }
+      </script> 
 <div class="letrero"><h1>Bienvenido a Venta de Destinación.</h1>
     <h2>Colvivienda</h2>
 </div>
@@ -119,7 +65,7 @@
             echo "<td>".$row['codigo_destinacion']."</td>";
             echo "<td>".$row['descripcion']."</td>";
             echo "<td><a href='../update/destinacion.php?codigo=".$row['codigo_destinacion']."'>Editar</a></td>";
-            echo "<td><a href=''>Eliminar</a></td>";
+            echo "<td><a href='javascript:preguntar(\"".$row['codigo_destinacion']."\")'>Eliminar</a></td>";
            
             echo "</tr>";
          }  

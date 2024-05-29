@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../css/insert.css">
     <title>Insertar Ciudad</title>
 </head>
+
 <body>
 
     <h1>Insertar nueva ciudad</h1>
