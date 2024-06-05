@@ -2,7 +2,7 @@
 
 include_once "../modulo/conexion.php";
 
-try{
+try {
 
     $vcodigo = filter_var($_POST['codigo']);
     $vdescri = filter_var($_POST['descripcion']);
@@ -18,8 +18,7 @@ try{
     header("location: ../read/pagina_de_ciudad.php");
     exit();
 
-    }
-catch (PDOException $e) {
+} catch (PDOException $e) {
     //Error;
     echo 'Error' . $e->getMessage();
     echo "<a href= ../read/pagina_de_ciudad.php>Volver</a>";

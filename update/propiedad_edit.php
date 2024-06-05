@@ -12,7 +12,7 @@
     <div class="container__boton">
         <a href="../read/pagina_de_propiedad.php">Devolver a Propiedad</a>
     </div>
-    <form action="../read/pagina_de_propiedad.php" method="POST">
+    <form action="propiedad_edit-sql.php" method="POST" enctype="multipart/form-data">
     <?php 
     include_once "../modulo/conexion.php";
 
@@ -203,7 +203,7 @@
         echo "</select>";
 
         echo '<label for="fecha" >fecha de registro de la propiedad</label>';
-        echo "<input type='datetime-local' id='fecha' name='fecha'  value='".$row['fecha_registro']."'>";  
+        echo "<input type='text' id='fecha' name='fecha'  value='".$row['fecha_registro']."' readonly>";  
 
     }
         ?>

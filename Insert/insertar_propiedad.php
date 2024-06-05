@@ -2,55 +2,55 @@
 
 include_once "../modulo/conexion.php";
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES["foto"])){
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES["foto"])) {
   $target_dir = "C:/xampp/htdocs/Colviviendas/imgs/casas/";
   $foto_guardar = "http://localhost/Colviviendas/imgs/casas/";
-  $target_file = $target_dir . basename ($_FILES['foto']['name']);
-  $target_file1 = $foto_guardar . basename ($_FILES['foto']['name']);
+  $target_file = $target_dir . basename($_FILES['foto']['name']);
+  $target_file1 = $foto_guardar . basename($_FILES['foto']['name']);
 
   $check = getimagesize($_FILES['foto']['tmp_name']);
-  if ($check === false){
+  if ($check === false) {
     echo '<script>confirmar=confirm("El archivo no es una imagen");
     if (confirmar)
       window.location.href="insertar_forma.php";</script>';
     echo "<a href= insertar_forma.php>Volver</a>";
   }
   //verifico el tamaño
-   if ($_FILES['foto']['size'] > 5000000){
+  if ($_FILES['foto']['size'] > 5000000) {
     echo '<script>confirmar=confirm("El archivo es demasiado grande");
     if (confirmar)
       window.location.href="insertar_forma.php";</script>';
     echo "<a href= insertar_forma.php>Volver</a>";
-   }
+  }
   // mueve el archivo a la ruta destino
-   if (move_uploaded_file($_FILES['foto']['tmp_name'], $target_file)){
+  if (move_uploaded_file($_FILES['foto']['tmp_name'], $target_file)) {
     $foto_path = $target_file;
     // echo "El archivo se ha subido correctamente: ". $foto_path;
-   }else{
+  } else {
     echo "hubo un error al subir este archivo";
-   }  
+  }
 
-try{
+  try {
 
     //se crean las variables
     $vcodigo = filter_var($_POST["codigo"]);
     $vdireccion = filter_var($_POST["direccion"]);
     $vfoto = $target_file1;
-    $vestado = filter_var ($_POST["estado"]);
-    $vpropietario = filter_var ($_POST["propietario"]);
-    $vpago = filter_var ($_POST["pago"]);
-    $vciudad = filter_var ($_POST["ciudad"]);
-    $vbarrio = filter_var ($_POST["barrio"]);
-    $vprecio = filter_var ($_POST["precio"]);
-    $vmodelo = filter_var ($_POST["modelo"]);
-    $vtipo = filter_var ($_POST["tipo"]);
-    $vedad = filter_var ($_POST["edad"]);
-    $vdestinacion = filter_var ($_POST["destinacion"]);
-    $vfecha = filter_var ($_POST["fecha"]);
+    $vestado = filter_var($_POST["estado"]);
+    $vpropietario = filter_var($_POST["propietario"]);
+    $vpago = filter_var($_POST["pago"]);
+    $vciudad = filter_var($_POST["ciudad"]);
+    $vbarrio = filter_var($_POST["barrio"]);
+    $vprecio = filter_var($_POST["precio"]);
+    $vmodelo = filter_var($_POST["modelo"]);
+    $vtipo = filter_var($_POST["tipo"]);
+    $vedad = filter_var($_POST["edad"]);
+    $vdestinacion = filter_var($_POST["destinacion"]);
+    $vfecha = filter_var($_POST["fecha"]);
 
 
 
-    
+
 
     //realizar la sintaxis del insert en sql para realizar el añadido
 
@@ -72,43 +72,44 @@ try{
        )
         values (:codigo,:direcci,:foto,:esta,:propie,:met_pago,:ciuda,:barri,:precio,:modelo,:fecha,:tipo,:edad,:desti)");
 
-        //Aqui se añaden los valores de las variables al insert
+    //Aqui se añaden los valores de las variables al insert
 
 
-        $insertar->bindParam(':codigo',$vcodigo);
-        $insertar->bindParam(':direcci',$vdireccion);
-        $insertar->bindParam(':foto',$vfoto);
-        $insertar->bindParam(':esta',$vestado);
-        $insertar->bindParam(':propie',$vpropietario);
-        $insertar->bindParam(':met_pago',$vpago);
-        $insertar->bindParam(':ciuda',$vciudad);
-        $insertar->bindParam(':barri',$vbarrio);
-        $insertar->bindParam(':precio',$vprecio);
-        $insertar->bindParam(':modelo',$vmodelo);
-        $insertar->bindParam(':fecha',$vfecha);
-        $insertar->bindParam(':tipo',$vtipo);
-        $insertar->bindParam(':edad',$vedad);
-        $insertar->bindParam(':desti',$vdestinacion);
-        
-        $insertar->execute();
+    $insertar->bindParam(':codigo', $vcodigo);
+    $insertar->bindParam(':direcci', $vdireccion);
+    $insertar->bindParam(':foto', $vfoto);
+    $insertar->bindParam(':esta', $vestado);
+    $insertar->bindParam(':propie', $vpropietario);
+    $insertar->bindParam(':met_pago', $vpago);
+    $insertar->bindParam(':ciuda', $vciudad);
+    $insertar->bindParam(':barri', $vbarrio);
+    $insertar->bindParam(':precio', $vprecio);
+    $insertar->bindParam(':modelo', $vmodelo);
+    $insertar->bindParam(':fecha', $vfecha);
+    $insertar->bindParam(':tipo', $vtipo);
+    $insertar->bindParam(':edad', $vedad);
+    $insertar->bindParam(':desti', $vdestinacion);
 
-         header("location: ../read/pagina_de_propiedad.php");
+    $insertar->execute();
 
-} catch (PDOException $e) {
-//Error;
-$error= $e->getCode();
+    header("location: ../read/pagina_de_propiedad.php");
 
-// if ($error==23000){
+  } catch (PDOException $e) {
+    //Error;
+    $error = $e->getCode();
+
+    // if ($error==23000){
 //   echo '<script>confirmar=confirm("Ese codigo de propiedad ya existe");
 //           if (confirmar)
 //             window.location.href="insertar_propiedad-forma.php";</script>';
 //           echo "<a href= insertar_propiedad-forma.php>Volver</a>";
 // }else{
-  echo 'Error' . $e->getMessage();
-  echo 'Error' . $e->getCode();
-  echo "<a href= insertar_propiedad-forma.php> Volver</a>";
-// }
-}}else{
+    echo 'Error' . $e->getMessage();
+    echo 'Error' . $e->getCode();
+    echo "<a href= insertar_propiedad-forma.php> Volver</a>";
+    // }
+  }
+} else {
   echo '<script>confirmar=confirm("Llene el campo foto");
   if (confirmar)
     window.location.href="insertar_propiedad-forma.php";</script>';
