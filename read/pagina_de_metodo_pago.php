@@ -24,14 +24,15 @@
     <h2>Colvivienda</h2>
   </div>
   <div class="container">
-    <div class="container__form">
+    <form name="buscar" id="buscar" action="" class="container__form">
       <label class="container__label" for="buscar">Buscar</label>
       <div class="container__input">
         <input class="container__input-text" type="text" name="buscar" id="buscar">
       </div>
-      <img class="container__img" src="../imgs/lupa.png" alt="lupa">
-    </div>
-
+      <a href="#" onclick="document.getElementById('buscar').submit();">
+        <img class="container__img" src="../imgs/lupa.png" alt="lupa">
+      </a>
+    </form>
 
     <div class="container__boton">
       <div class="container__boton-volver">
@@ -50,8 +51,18 @@
   $dbhandle = mysqli_connect($mysql_host, $mysql_user, $password) or die('Problemas de conexión con DB');
 
   $selected = mysqli_select_db($dbhandle, 'colviviendas') or die("No se encontro el esquema");
+  
+  if (empty($_GET['buscar'])) {
+    //si es vacia la opcion trae todo.
+    $matriz = mysqli_query($dbhandle, "select * from metodo_pago;");
+  } else {
+    $matriz = mysqli_query($dbhandle, "select * from metodo_pago where descripcion like '%" . $_GET['buscar'] . "%';");
+    $vregistros = mysqli_num_rows($matriz);
+    if ($vregistros == 0) {
+      echo "no se encontraron registros";
+    }
+  }
 
-  $matriz = mysqli_query($dbhandle, "select * from metodo_pago;");
 
   //primera fila
   echo "<table>";
@@ -68,7 +79,7 @@
     echo "<tr>";
     echo "<td>" . $row['codigo_metodo'] . "</td>";
     echo "<td>" . $row['descripcion'] . "</td>";
-    echo "<td><a href='../update/metodo-pago_edit.php?codigo='" . $row['codigo_metodo'] . "'>Editar</a></td>";
+    echo "<td><a href='../update/metodo-pago_edit.php?codigo=" . $row['codigo_metodo'] . "'>Editar</a></td>";
     echo "<td><a href='javascript:preguntar(\"" . $row['codigo_metodo'] . "\")'>Eliminar</a></td>";
 
   }

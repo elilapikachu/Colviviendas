@@ -23,13 +23,15 @@
     <h2>Colvivienda</h2>
   </div>
   <div class="container">
-    <div class="container__form">
+    <form name="buscar" id="buscar" action="" class="container__form">
       <label class="container__label" for="buscar">Buscar</label>
       <div class="container__input">
         <input class="container__input-text" type="text" name="buscar" id="buscar">
       </div>
-      <img class="container__img" src="../imgs/lupa.png" alt="lupa">
-    </div>
+      <a href="#" onclick="document.getElementById('buscar').submit();">
+        <img class="container__img" src="../imgs/lupa.png" alt="lupa">
+      </a>
+    </form>
 
 
     <div class="container__boton">
@@ -50,7 +52,18 @@
 
   $selected = mysqli_select_db($dbhandle, 'colviviendas') or die("No se encontro el esquema");
 
-  $matriz = mysqli_query($dbhandle, "select * from estado;");
+  if (empty($_GET['buscar'])) {
+    //si es vacia la opcion trae todo.
+    $matriz = mysqli_query($dbhandle, "select * from estado;");
+  } else {
+    $matriz = mysqli_query($dbhandle, "select * from estado where descripcion like '%" . $_GET['buscar'] . "%';");
+    $vregistros = mysqli_num_rows($matriz);
+    if ($vregistros == 0) {
+      echo "no se encontraron registros";
+    }
+  }
+
+
 
   //primera fila
   echo "<table>";

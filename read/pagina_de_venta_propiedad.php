@@ -10,12 +10,12 @@
 
 <body>
   <script>
-    function preguntar(codigo, codigo2) {
+    function preguntar(codigo) {
 
       eliminar = confirm("¿Deseas eliminar este registro?");
 
       if (eliminar)
-        window.location.href = "../delete/eliminar_venta_propiedad.php?codigo=" + codigo + "?codigo2=" + codigo2;
+        window.location.href = "../delete/eliminar_venta_propiedad.php?codigo=" + codigo;
     }
   </script>
   <div class="letrero">
@@ -23,13 +23,16 @@
     <h2>Colvivienda</h2>
   </div>
   <div class="container">
-    <div class="container__form">
+
+    <form name="buscar" id="buscar" action="" class="container__form">
       <label class="container__label" for="buscar">Buscar</label>
       <div class="container__input">
         <input class="container__input-text" type="text" name="buscar" id="buscar">
       </div>
-      <img class="container__img" src="../imgs/lupa.png" alt="lupa">
-    </div>
+      <a href="#" onclick="document.getElementById('buscar').submit();">
+        <img class="container__img" src="../imgs/lupa.png" alt="lupa">
+      </a>
+    </form>
 
 
     <div class="container__boton">
@@ -50,7 +53,17 @@
 
   $selected = mysqli_select_db($dbhandle, 'colviviendas') or die("No se encontro el esquema");
 
-  $matriz = mysqli_query($dbhandle, "select a.nro_venta, a.codigo_propiedad, b.direccion, a.fecha_entrega, b.precio, a.precio_final FROM venta_propiedad a, propiedad b WHERE a.codigo_propiedad = b.codigo_propiedad;");
+  if (empty($_GET['buscar'])) {
+    //si es vacia la opcion trae todo.
+    $matriz = mysqli_query($dbhandle, "select a.nro_venta, a.codigo_propiedad, b.direccion, a.fecha_entrega, b.precio, a.precio_final FROM venta_propiedad a, propiedad b WHERE a.codigo_propiedad = b.codigo_propiedad;");
+  } else {
+    $matriz = mysqli_query($dbhandle, "select a.nro_venta, a.codigo_propiedad, b.direccion, a.fecha_entrega, b.precio, a.precio_final FROM venta_propiedad a, propiedad b WHERE a.codigo_propiedad = b.codigo_propiedad and b.direccion like '%" . $_GET['buscar'] . "%';");
+    $vregistros = mysqli_num_rows($matriz);
+    if ($vregistros == 0) {
+      echo "no se encontraron registros";
+    }
+  }
+
 
   //primera fila
   echo "<table>";
@@ -77,7 +90,7 @@
     echo "<td>" . $row['precio_final'] . "</td>";
     echo "</tr>";
     echo "<td><a href='../update/venta-propiedad.php?codigo=" . $row['nro_venta'] . "'>Editar</a></td>";
-    echo "<td><a href='javascript:preguntar(\"" . $row['nro_venta'] . "," . $row['codigo_propiedad'] . "\")'>Eliminar</a></td>";
+    echo "<td><a href='javascript:preguntar(\"" . $row['nro_venta'] . "\")'>Eliminar</a></td>";
   }
 
 

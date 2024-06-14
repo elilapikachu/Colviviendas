@@ -11,7 +11,7 @@ try {
     $update = $conexion->prepare("update metodo_pago SET  codigo_metodo = :A,  descripcion = :B
     where codigo_metodo = :primaria;");
     $update->bindParam(':A', $vcodigo);
-    $update->bindParam(':B', $vpropiedad);
+    $update->bindParam(':B', $vdescrip);
     $update->bindParam(':primaria', $vcodigo);
 
 

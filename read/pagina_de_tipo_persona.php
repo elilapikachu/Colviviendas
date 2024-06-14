@@ -23,13 +23,15 @@
     <h2>Colvivienda</h2>
   </div>
   <div class="container">
-    <div class="container__form">
+    <form name="buscar" id="buscar" action="" class="container__form">
       <label class="container__label" for="buscar">Buscar</label>
       <div class="container__input">
         <input class="container__input-text" type="text" name="buscar" id="buscar">
       </div>
-      <img class="container__img" src="../imgs/lupa.png" alt="lupa">
-    </div>
+      <a href="#" onclick="document.getElementById('buscar').submit();">
+        <img class="container__img" src="../imgs/lupa.png" alt="lupa">
+      </a>
+    </form>
 
 
     <div class="container__boton">
@@ -49,8 +51,20 @@
   $dbhandle = mysqli_connect($mysql_host, $mysql_user, $password) or die('Problemas de conexión con DB');
 
   $selected = mysqli_select_db($dbhandle, 'colviviendas') or die("No se encontro el esquema");
+  
+  if (empty($_GET['buscar'])) {
+    //si es vacia la opcion trae todo. 
+    $matriz = mysqli_query($dbhandle, "select * from tipo_persona;");
 
-  $matriz = mysqli_query($dbhandle, "select * from tipo_persona;");
+  } else {
+    $matriz = mysqli_query($dbhandle, "select * from tipo_persona where descripcion like '%" . $_GET['buscar'] . "%';");
+    $vregistros = mysqli_num_rows($matriz);
+    if ($vregistros == 0) {
+      echo "no se encontraron registros";
+    }
+  }
+
+
 
   //primera fila
   echo "<table>";

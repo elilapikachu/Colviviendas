@@ -13,8 +13,19 @@ try {
 
     header("location: ../read/pagina_de_estado.php");
 
-} catch (PDOException $e) {
+}catch (PDOException $e) {
     //Error;
-    echo 'Error' . $e->getMessage();
+ 
+    
+    if ($error==23000){
+      echo '<script>confirmar=confirm("Ese tiene asociado registros no puede borrarse");
+              if (confirmar)
+                window.location.href="../read/Pagina_de_estado.php";</script>';
+              echo "<a href=../read/Pagina_de_estado.php>Volver</a>";
+    }else{
+      echo 'Error' . $e->getMessage();
+      echo 'Error' . $e->getCode();
+      echo "<a href=../read/Pagina_de_estado.php>Volver</a>";
+    }
 }
 ?>

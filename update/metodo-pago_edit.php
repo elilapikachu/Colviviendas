@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/insert.css">
-  <title>Insertar Metodo</title>
+  <title>editar Metodo</title>
 </head>
 
 <body>
@@ -17,6 +17,7 @@
   <form action="metodo-pago_edit_sql.php" method="POST">
     <?php
     $vcodigo = filter_var($_GET['codigo']);
+
     $mysql_host = 'localhost';
     $mysql_user = 'root';
     $password = '';
@@ -25,7 +26,9 @@
 
     $selected = mysqli_select_db($dbhandle, 'colviviendas') or die("No se encontro el esquema");
 
-    $matriz = mysqli_query($dbhandle, "select * from metodo_pago where codigo_metodo ='" . $vcodigo . ";");
+    $matriz = mysqli_query($dbhandle, "select * from metodo_pago where codigo_metodo ='" . $vcodigo . "';");
+
+
 
     while ($row = mysqli_fetch_array($matriz, MYSQLI_ASSOC)) {
 

@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] = 'POST') {
         $update->bindParam(':propietario', $vpropietario);
         $update->bindParam(':metodo_pago', $vpago);
         $update->bindParam(':ciudad', $vciudad);
-        $update->bindParam(':fecha_registro', $vfecha_registro);
+        $update->bindParam(':fecha_registro', $vfecha);
         $update->bindParam(':barrio', $vbarrio);
         $update->bindParam(':precio', $vprecio);
         $update->bindParam(':modelo', $vmodelo);
@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] = 'POST') {
 
         echo 'Error' . $e->getMessage();
         echo 'Error' . $e->getCode();
-        echo "<a href=personajoin.php> Volver </a>";
+        echo "<a href='../read/pagina_de_propiedad.php'> Volver </a>";
 
     }
 }

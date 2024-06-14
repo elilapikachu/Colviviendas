@@ -140,7 +140,7 @@ CREATE TABLE `ciudad` (
 
 LOCK TABLES `ciudad` WRITE;
 /*!40000 ALTER TABLE `ciudad` DISABLE KEYS */;
-INSERT INTO `ciudad` VALUES ('01','Medellin'),('02','Bogota'),('03','Cali'),('04','Barranquilla'),('05','Cartagena'),('06','Manizales'),('90','si');
+INSERT INTO `ciudad` VALUES ('01','Medellin'),('02','Bogota'),('03','Cali'),('04','Barranquilla'),('05','Cartagena'),('06','Manizales');
 /*!40000 ALTER TABLE `ciudad` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -164,7 +164,7 @@ CREATE TABLE `destinacion` (
 
 LOCK TABLES `destinacion` WRITE;
 /*!40000 ALTER TABLE `destinacion` DISABLE KEYS */;
-INSERT INTO `destinacion` VALUES ('11','Residencia'),('13','Residencial'),('14','Residencial'),('15','Mixta'),('16','Recreativo'),('17','Vacacional'),('20','Alquiler');
+INSERT INTO `destinacion` VALUES ('11','Residencial'),('13','Departamento'),('14','Finca'),('15','Mixta'),('16','Recreativo'),('17','Vacacional'),('20','Alquiler');
 /*!40000 ALTER TABLE `destinacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,7 +188,7 @@ CREATE TABLE `estado` (
 
 LOCK TABLES `estado` WRITE;
 /*!40000 ALTER TABLE `estado` DISABLE KEYS */;
-INSERT INTO `estado` VALUES ('15','Nequi'),('E1','Disponible'),('E2','Vendido'),('E3','Alquilado'),('E4','En proceso de venta'),('E5','En proceso de construcción'),('E6','Requiere reparaciones'),('E7','Bajo contrato');
+INSERT INTO `estado` VALUES ('E1','Disponible'),('E2','Vendido'),('E3','Alquilado'),('E4','En proceso de venta'),('E5','En proceso de construcción'),('E6','Requiere reparaciones'),('E7','Bajo contrato');
 /*!40000 ALTER TABLE `estado` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -236,7 +236,7 @@ CREATE TABLE `metodo_pago` (
 
 LOCK TABLES `metodo_pago` WRITE;
 /*!40000 ALTER TABLE `metodo_pago` DISABLE KEYS */;
-INSERT INTO `metodo_pago` VALUES ('M1','Transferencia bancaria'),('M2','Pago en efectivo'),('M3','Cheque'),('M4','Tarjeta de crédito/débito'),('M5','Transferencia electrónica de fondos (TEF)'),('NE','Nequi');
+INSERT INTO `metodo_pago` VALUES ('M1','Transferencia bancaria'),('M2','Pago en efectivo'),('M3','Cheque'),('M4','Tarjeta de crédito/débito'),('M5','lo que habia antes pipi'),('NE','Nequi');
 /*!40000 ALTER TABLE `metodo_pago` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -284,7 +284,7 @@ CREATE TABLE `motivo_cita` (
 
 LOCK TABLES `motivo_cita` WRITE;
 /*!40000 ALTER TABLE `motivo_cita` DISABLE KEYS */;
-INSERT INTO `motivo_cita` VALUES ('19','SE QUIERE DIVORCIAR CON SU NOVIO Y POR '),('67','Hola, estoy interesado en una casa que vi anunciada en su página web en el Barrio El Poblado en Medellín. ¿Podría programar una visita para esta seman'),('68','Buenos días, estamos buscando un apartamento para alquilar en el Barrio Chapinero en Bogotá. ¿Sería posible visitar el apartamento que tienen disponib'),('69','Hola, he decidido comprar el local comercial en el Barrio Usaquén. ¿Podríamos programar una cita para firmar el contrato de compraventa y realizar la '),('70','Hola, estoy interesado en alquilar el apartamento en Laureles. ¿Podríamos reunirnos para discutir los términos del contrato de arrendamiento?'),('71','Hola, estamos considerando invertir en una propiedad en Envigado y nos gustaría recibir asesoramiento personalizado.');
+INSERT INTO `motivo_cita` VALUES ('67','Hola, estoy interesado en una casa que vi anunciada en su página web en el Barrio El Poblado en Medellín. ¿Podría programar una visita para esta seman'),('68','Buenos días, estamos buscando un apartamento para alquilar en el Barrio Chapinero en Bogotá. ¿Sería posible visitar el apartamento que tienen disponib'),('69','Hola, he decidido comprar el local comercial en el Barrio Usaquén. ¿Podríamos programar una cita para firmar el contrato de compraventa y realizar la '),('70','Hola, estoy interesado en alquilar el apartamento en Laureles. ¿Podríamos reunirnos para discutir los términos del contrato de arrendamiento?'),('71','Hola, estamos considerando invertir en una propiedad en Envigado y nos gustaría recibir asesoramiento personalizado.');
 /*!40000 ALTER TABLE `motivo_cita` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -304,7 +304,7 @@ CREATE TABLE `persona` (
   `ciudad` varchar(2) NOT NULL,
   `fecha_registro` datetime(5) NOT NULL,
   `tipo_persona` varchar(2) NOT NULL,
-  `contrasena` varchar(8) NOT NULL,
+  `contrasena` varchar(20) NOT NULL,
   `correo` varchar(50) NOT NULL,
   `foto` varchar(100) NOT NULL,
   PRIMARY KEY (`identificacion`),
@@ -373,7 +373,7 @@ CREATE TABLE `propiedad` (
 
 LOCK TABLES `propiedad` WRITE;
 /*!40000 ALTER TABLE `propiedad` DISABLE KEYS */;
-INSERT INTO `propiedad` VALUES ('1223','calle 32 #65-23 (interior 9)','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRnq3vHTTXwQd7bRsMrGpc0WFX-jBu_9Zv04j7A0HBDQ&s','E4','6712678361','NE','02','CT',122165,'2P','0000-00-00','CO',10,'13'),('1632','Carrera 33 # 10-75','http://localhost/colviviendas/imgs/casas/casa.jpg','E4','192018172','M1','01','ME',570000000,'2P','2020-04-02','CO',12,'13'),('1929200','calle 32 #65-23 (interior 9)','','E4','192018172','M1','06','CT',122165,'2P','2024-05-05','CO',1,'13'),('5176','Carrera 50 # 80-30','http://localhost/colviviendas/imgs/casas/casa2.jpg','E4','1015189022','M5','03','CT',619000000,'CT','2022-03-01','CO',24,'14'),('6131','Calle de las Damas # 10-15','http://localhost/colviviendas/imgs/casas/casa3.jpg','E5','1025652106','M2','05','CG',815000000,'CV','2022-06-30','PT',15,'17'),('6326','Calle 62 # 15-35','http://localhost/colviviendas/imgs/casas/casa4.jpg','E1','192726117','M2','02','BP',1140000000,'CC','2023-12-28','PI',34,'13'),('9327','Avenida 4 Norte # 23-45,','http://localhost/colviviendas/imgs/casas/casa5.jpg','E6','1920390292','M4','04','ME',489000000,'CT','2023-02-28','PU',26,'16');
+INSERT INTO `propiedad` VALUES ('11','calle 80 #87-2 (nube 3)','http://localhost/Colviviendas/imgs/casas/ritualponiatico.jpg','E1','1015189022','M1','04','BC',90000,'2P','0000-00-00','CO',1,'11'),('1223','calle 32 #65-23 (interior 9)','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRnq3vHTTXwQd7bRsMrGpc0WFX-jBu_9Zv04j7A0HBDQ&s','E4','6712678361','NE','02','CT',122165,'2P','0000-00-00','CO',10,'13'),('1632','Carrera 33 # 10-75','http://localhost/colviviendas/imgs/casas/casa.jpg','E1','1015189022','M1','03','BC',570000000,'2P','2020-04-02','CO',12,'11'),('5176','Carrera 50 # 80-30','http://localhost/colviviendas/imgs/casas/casa2.jpg','E4','1015189022','M5','03','CT',619000000,'CT','2022-03-01','CO',24,'14'),('6131','Calle de las Damas # 10-15','http://localhost/colviviendas/imgs/casas/casa3.jpg','E5','1025652106','M2','05','CG',815000000,'CV','2022-06-30','PT',15,'17'),('6326','calle 80 #87-2 (nube 3)','http://localhost/colviviendas/imgs/casas/casa4.jpg','E1','1015189022','M1','01','BC',1140000000,'2P','0000-00-00','CO',34,'11'),('9327','Avenida 4 Norte # 23-45,','http://localhost/colviviendas/imgs/casas/casa5.jpg','E6','1920390292','M4','04','ME',489000000,'CT','2023-02-28','PU',26,'16');
 /*!40000 ALTER TABLE `propiedad` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -477,7 +477,7 @@ CREATE TABLE `venta_propiedad` (
 
 LOCK TABLES `venta_propiedad` WRITE;
 /*!40000 ALTER TABLE `venta_propiedad` DISABLE KEYS */;
-INSERT INTO `venta_propiedad` VALUES ('350637','5176','2024-02-15',560000000),('351364','1632','2024-04-25',390000000),('354235','6131','2023-11-22',689000000),('356479','6326','2024-03-20',478000000),('359495','9327','2023-08-15',560000000);
+INSERT INTO `venta_propiedad` VALUES ('351364','1223','2024-06-14',122312),('351364','1632','2024-04-25',390000000),('354235','6131','2023-11-22',689000000),('356479','6326','2024-03-20',478000000);
 /*!40000 ALTER TABLE `venta_propiedad` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -490,4 +490,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-07 13:07:13
+-- Dump completed on 2024-06-14 14:36:12

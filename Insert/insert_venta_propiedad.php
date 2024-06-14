@@ -13,7 +13,7 @@ try {
 
   //realizar la sintaxis del insert en sql para realizar el añadido
 
-  $insertar = $conexion->prepare("insert into tipo_persona(
+  $insertar = $conexion->prepare("insert into venta_propiedad(
         nro_venta,	
         codigo_propiedad,	
         fecha_entrega,	
@@ -28,7 +28,7 @@ try {
   $insertar->bindParam(':D', $vprecio);
   $insertar->execute();
 
-  header("location: ../read/pagina_de_tipo_persona.php");
+  header("location: ../read/pagina_de_venta_propiedad.php");
 
 } catch (PDOException $e) {
   //Error;

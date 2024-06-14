@@ -4,9 +4,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="../css/reads.css">
   <title>Propiedad</title>
 </head>
+<style>
+  @keyframes texto {
+    from {
+      margin-left: 100%;
+      width: 300%;
+    }
+
+    to {
+      margin-left: 0%;
+      width: 100%;
+    }
+  }
+
+  h1 {
+    animation-duration: 3s;
+    animation-name: texto;
+    animation-iteration-count: initial;
+    animation-direction: alternate;
+  }
+
+  h2 {
+    animation-duration: 3s;
+    animation-name: texto;
+    animation-iteration-count: initial;
+    animation-direction: alternate;
+  }
+</style>
 
 <body>
   <script>
@@ -23,13 +51,15 @@
     <h2>Colvivienda</h2>
   </div>
   <div class="container">
-    <div class="container__form">
+    <form name="buscar" id="buscar" class="container__form">
       <label class="container__label" for="buscar">Buscar</label>
       <div class="container__input">
         <input class="container__input-text" type="text" name="buscar" id="buscar">
       </div>
-      <img class="container__img" src="../imgs/lupa.png" alt="lupa">
-    </div>
+      <a href="#" onclick="document.getElementById('buscar').submit();">
+        <img class="container__img" src="../imgs/lupa.png" alt="lupa">
+      </a>
+    </form>
 
 
     <div class="container__boton">
@@ -52,7 +82,19 @@
 
   $selected = mysqli_select_db($dbhandle, 'colviviendas') or die("No se encontro el esquema");
 
-  $matriz = mysqli_query($dbhandle, "SELECT a.codigo_propiedad, a.direccion, a.foto, b.descripcion as estado, c.nombre, c.apellido, d.descripcion, e.descripcion as ciudad, f.descripcion as barrio, a.precio, g.descripcion as modelo, a.fecha_registro, h.descripcion as tipo_propiedad, a.edad, i.descripcion as destinacion FROM propiedad a, estado b, persona c, metodo_pago d, ciudad e, barrio f, modelo g, tipo_propiedad h, destinacion i where a.estado = b.codigo_estado and a.propietario = c.identificacion and a.metodo_pago = d.codigo_metodo and a.ciudad = e.codigo_ciudad and a.barrio = f.codigo_barrio and a.modelo = g.codigo_modelo and a.tipo_propiedad = h.codigo_tipo and a.destinacion = i.codigo_destinacion;");
+  if (empty($_GET['buscar'])) {
+    //si es vacia la opcion trae todo.
+    $matriz = mysqli_query($dbhandle, "SELECT a.codigo_propiedad, a.direccion, a.foto, b.descripcion as estado, c.nombre, c.apellido, d.descripcion, e.descripcion as ciudad, f.descripcion as barrio, a.precio, g.descripcion as modelo, a.fecha_registro, h.descripcion as tipo_propiedad, a.edad, i.descripcion as destinacion FROM propiedad a, estado b, persona c, metodo_pago d, ciudad e, barrio f, modelo g, tipo_propiedad h, destinacion i where a.estado = b.codigo_estado and a.propietario = c.identificacion and a.metodo_pago = d.codigo_metodo and a.ciudad = e.codigo_ciudad and a.barrio = f.codigo_barrio and a.modelo = g.codigo_modelo and a.tipo_propiedad = h.codigo_tipo and a.destinacion = i.codigo_destinacion;");
+
+  } else {
+
+    $matriz = mysqli_query($dbhandle, "SELECT a.codigo_propiedad, a.direccion, a.foto, b.descripcion as estado, c.nombre, c.apellido, d.descripcion, e.descripcion as ciudad, f.descripcion as barrio, a.precio, g.descripcion as modelo, a.fecha_registro, h.descripcion as tipo_propiedad, a.edad, i.descripcion as destinacion FROM propiedad a, estado b, persona c, metodo_pago d, ciudad e, barrio f, modelo g, tipo_propiedad h, destinacion i where a.estado = b.codigo_estado and a.propietario = c.identificacion and a.metodo_pago = d.codigo_metodo and a.ciudad = e.codigo_ciudad and a.barrio = f.codigo_barrio and a.modelo = g.codigo_modelo and a.tipo_propiedad = h.codigo_tipo and a.destinacion = i.codigo_destinacion and a.direccion like '%" . $_GET['buscar'] . "%';");
+    $vregistros = mysqli_num_rows($matriz);
+    if ($vregistros == 0) {
+      echo "no se encontraron registros";
+    }
+  }
+
 
   //primera fila
   echo "<table>";
@@ -107,6 +149,10 @@
   echo "</table>";
 
   ?>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
 </body>
 
 </html>

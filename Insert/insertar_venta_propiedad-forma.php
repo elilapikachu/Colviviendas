@@ -14,7 +14,7 @@
   <div class="container__boton">
     <a href="../read/pagina_de_venta_propiedad.php">Devolver a Venta de Propiedad</a>
   </div>
-  <form action="insertar_venta_propiedad.php" method="POST">
+  <form action="insert_venta_propiedad.php" method="POST">
     <?php
     include_once "../modulo/conexion.php";
 

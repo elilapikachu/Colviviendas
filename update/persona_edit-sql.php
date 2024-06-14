@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] = 'POST') {
 
         echo 'Error' . $e->getMessage();
         echo 'Error' . $e->getCode();
-        echo "<a href=personajoin.php> Volver </a>";
+        echo "<a href='../read/Persona.php'> Volver </a>";
 
     }
 }

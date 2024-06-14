@@ -15,6 +15,17 @@ try {
 
 } catch (PDOException $e) {
     //Error;
-    echo 'Error' . $e->getMessage();
+ 
+    
+    if ($error==23000){
+      echo '<script>confirmar=confirm("Ese tiene asociado registros no puede borrarse");
+              if (confirmar)
+                window.location.href="../read/Pagina_de_destinacion.php";</script>';
+              echo "<a href=../read/Pagina_de_destinacion.php>Volver</a>";
+    }else{
+      echo 'Error' . $e->getMessage();
+      echo 'Error' . $e->getCode();
+      echo "<a href=../read/Pagina_de_destinacion.php>Volver</a>";
+    }
 }
 ?>

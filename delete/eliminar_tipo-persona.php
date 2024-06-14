@@ -4,17 +4,28 @@ include_once "../modulo/conexion.php";
 
 try {
 
-    //se crean las variables
-    $vcodigo = filter_var($_GET['codigo']);
+  //se crean las variables
+  $vcodigo = filter_var($_GET['codigo']);
 
-    $delete = $conexion->prepare("DELETE FROM tipo_persona WHERE codigo_tipo = :codigo");
-    $delete->bindParam(':codigo', $vcodigo);
-    $delete->execute();
+  $delete = $conexion->prepare("DELETE FROM tipo_persona WHERE codigo_tipo = :codigo");
+  $delete->bindParam(':codigo', $vcodigo);
+  $delete->execute();
 
-    header("location: ../read/pagina_de_tipo_persona.php");
+  header("location: ../read/pagina_de_tipo_persona.php");
 
 } catch (PDOException $e) {
-    //Error;
+  //Error;
+
+
+  if ($error == 23000) {
+    echo '<script>confirmar=confirm("Ese tiene asociado registros no puede borrarse");
+              if (confirmar)
+                window.location.href="../read/pagina_de_tipo_persona.php";</script>';
+    echo "<a href=../read/pagina_de_tipo_persona.php>Volver</a>";
+  } else {
     echo 'Error' . $e->getMessage();
+    echo 'Error' . $e->getCode();
+    echo "<a href='../read/pagina_de_tipo_persona.php'>Volver</a>";
+  }
 }
 ?>
