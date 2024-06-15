@@ -64,6 +64,11 @@
     $matriz = mysqli_query($dbhandle, "select a.identificacion, a.nombre, a.apellido, a.direccion, a.telefono, b.descripcion, a.fecha_registro, c.descripcion as tipo_persona, a.contrasena, a.correo, a.foto from persona a, ciudad b, tipo_persona c where a.ciudad = b.codigo_ciudad AND c.codigo_tipo = a.tipo_persona and a.nombre like '%" . $_GET['buscar'] . "%';");
     $vregistros = mysqli_num_rows($matriz);
     if ($vregistros == 0) {
+      $matriz = mysqli_query($dbhandle, "select a.identificacion, a.nombre, a.apellido, a.direccion, a.telefono, b.descripcion, a.fecha_registro, c.descripcion as tipo_persona, a.contrasena, a.correo, a.foto from persona a, ciudad b, tipo_persona c where a.ciudad = b.codigo_ciudad AND c.codigo_tipo = a.tipo_persona and a.apellido like '%" . $_GET['buscar'] . "%';");
+      $vregistros = mysqli_num_rows($matriz);
+
+    }
+    if ($vregistros == 0) {
       echo "no se encontraron registros";
     }
   }
