@@ -15,7 +15,7 @@ try {
 
 } catch (PDOException $e) {
   //Error;
-
+  $error = $e->getCode();
 
   if ($error == 23000) {
     echo '<script>confirmar=confirm("Ese tiene asociado registros no puede borrarse");

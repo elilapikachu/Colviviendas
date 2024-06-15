@@ -27,7 +27,7 @@
 
     $selected = mysqli_select_db($dbhandle, 'colviviendas') or die("No se encontro el esquema");
 
-    $matriz = mysqli_query($dbhandle, "SELECT a.codigo_propiedad, a.direccion, a.foto, b.descripcion as estado, c.identificacion, d.descripcion, e.descripcion as ciudad, f.descripcion as barrio, a.precio, g.descripcion as modelo, a.fecha_registro, h.descripcion as tipo_propiedad, a.edad, i.descripcion as destinacion FROM propiedad a, estado b, persona c, metodo_pago d, ciudad e, barrio f, modelo g, tipo_propiedad h, destinacion i where a.estado = b.codigo_estado and a.propietario = c.identificacion and a.metodo_pago = d.codigo_metodo and a.ciudad = e.codigo_ciudad and a.barrio = f.codigo_barrio and a.modelo = g.codigo_modelo and a.tipo_propiedad = h.codigo_tipo and a.destinacion = i.codigo_destinacion and a.codigo_propiedad = '" . $vcodigo . "';");
+    $matriz = mysqli_query($dbhandle, "SELECT a.codigo_propiedad, a.direccion, a.foto, b.codigo_estado ,b.descripcion as estado, c.identificacion, d.codigo_metodo ,d.descripcion, e.codigo_ciudad, e.descripcion as ciudad, f.codigo_barrio ,f.descripcion as barrio, a.precio, g.codigo_modelo, g.descripcion as modelo, a.fecha_registro, h.codigo_tipo , h.descripcion as tipo_propiedad, a.edad, i.codigo_destinacion, i.descripcion as destinacion FROM propiedad a, estado b, persona c, metodo_pago d, ciudad e, barrio f, modelo g, tipo_propiedad h, destinacion i where a.estado = b.codigo_estado and a.propietario = c.identificacion and a.metodo_pago = d.codigo_metodo and a.ciudad = e.codigo_ciudad and a.barrio = f.codigo_barrio and a.modelo = g.codigo_modelo and a.tipo_propiedad = h.codigo_tipo and a.destinacion = i.codigo_destinacion and a.codigo_propiedad = '" . $vcodigo . "';");
 
     while ($row = mysqli_fetch_array($matriz, MYSQLI_ASSOC)) {
 
@@ -50,7 +50,14 @@
 
         echo "<select id=estado name=estado>";
         while ($row1 = $matriz1->fetch()) {
-          echo "<option value=" . $row1['codigo_estado'] . ">" . $row1['codigo_estado'] . " - " . $row1['descripcion'] . "</option>";
+
+          if ($row1['codigo_estado'] == $row['codigo_estado']) {
+
+            echo "<option value=" . $row1['codigo_estado'] . " selected>" . $row1['codigo_estado'] . " - " . $row1['descripcion'] . "</option>";
+          } else {
+
+            echo "<option value=" . $row1['codigo_estado'] . ">" . $row1['codigo_estado'] . " - " . $row1['descripcion'] . "</option>";
+          }
         }
       } catch (PDOException $e) {
         //Cada de que ocurra algun error
@@ -58,7 +65,6 @@
       }
 
       echo "</select>";
-
       echo '<label for="propietario" >Identificacion del propietario</label>';
       // echo "<input type='text' id='propietario' name='propietario' value=''>";
       try {
@@ -68,7 +74,14 @@
 
         echo "<select id=propietario name=propietario>";
         while ($row1 = $matriz1->fetch()) {
-          echo "<option value=" . $row1['identificacion'] . ">" . $row1['identificacion'] . " - " . $row1['nombre'] . " " . $row1['apellido'] . "</option>";
+
+          if ($row1['identificacion'] == $row['identificacion']) {
+
+            echo "<option value=" . $row1['identificacion'] . " selected>" . $row1['identificacion'] . " - " . $row1['nombre'] . " " . $row1['apellido'] . "</option>";
+          } else {
+
+            echo "<option value=" . $row1['identificacion'] . ">" . $row1['identificacion'] . " - " . $row1['nombre'] . " " . $row1['apellido'] . "</option>";
+          }
         }
       } catch (PDOException $e) {
         //Cada de que ocurra algun error
@@ -88,10 +101,17 @@
 
         echo "<select id=pago name=pago>";
         while ($row1 = $matriz1->fetch()) {
-          echo "<option value=" . $row1['codigo_metodo'] . ">" . $row1['codigo_metodo'] . " - " . $row1['descripcion'] . "</option>";
+
+          if ($row1['codigo_metodo'] == $row['codigo_metodo']) {
+
+            echo "<option value=" . $row1['codigo_metodo'] . " selected>" . $row1['codigo_metodo'] . " - " . $row1['descripcion'] . "</option>";
+          } else {
+
+            echo "<option value=" . $row1['codigo_metodo'] . ">" . $row1['codigo_metodo'] . " - " . $row1['descripcion'] . "</option>";
+          }
         }
       } catch (PDOException $e) {
-        //Casa de que ocurra algun error
+        //Cada de que ocurra algun error
         echo "Fallo el select " . $e->getMessage();
       }
 
@@ -102,14 +122,21 @@
       try {
         // Ejecutando sql
     
-        $matriz1 = $conexion->query("select * from ciudad Order by codigo_ciudad");
+        $matriz1 = $conexion->query("select codigo_ciudad, descripcion from ciudad Order by codigo_ciudad");
 
         echo "<select id=ciudad name=ciudad>";
         while ($row1 = $matriz1->fetch()) {
-          echo "<option value=" . $row1['codigo_ciudad'] . ">" . $row1['codigo_ciudad'] . " - " . $row1['descripcion'] . "</option>";
+
+          if ($row1['codigo_ciudad'] == $row['codigo_ciudad']) {
+
+            echo "<option value=" . $row1['codigo_ciudad'] . " selected>" . $row1['codigo_ciudad'] . " - " . $row1['descripcion'] . "</option>";
+          } else {
+
+            echo "<option value=" . $row1['codigo_ciudad'] . ">" . $row1['codigo_ciudad'] . " - " . $row1['descripcion'] . "</option>";
+          }
         }
       } catch (PDOException $e) {
-        //Casa de que ocurra algun error
+        //Cada de que ocurra algun error
         echo "Fallo el select " . $e->getMessage();
       }
 
@@ -125,10 +152,17 @@
 
         echo "<select id=barrio name=barrio>";
         while ($row1 = $matriz1->fetch()) {
-          echo "<option value=" . $row1['codigo_barrio'] . ">" . $row1['codigo_barrio'] . " - " . $row1['descripcion'] . "</option>";
+
+          if ($row1['codigo_barrio'] == $row['codigo_barrio']) {
+
+            echo "<option value=" . $row1['codigo_barrio'] . " selected>" . $row1['codigo_barrio'] . " - " . $row1['descripcion'] . "</option>";
+          } else {
+
+            echo "<option value=" . $row1['codigo_barrio'] . ">" . $row1['codigo_barrio'] . " - " . $row1['descripcion'] . "</option>";
+          }
         }
       } catch (PDOException $e) {
-        //Casa de que ocurra algun error
+        //Cada de que ocurra algun error
         echo "Fallo el select " . $e->getMessage();
       }
 
@@ -147,10 +181,17 @@
 
         echo "<select id=modelo name=modelo>";
         while ($row1 = $matriz1->fetch()) {
-          echo "<option value=" . $row1['codigo_modelo'] . ">" . $row1['codigo_modelo'] . " - " . $row1['descripcion'] . "</option>";
+
+          if ($row1['codigo_modelo'] == $row['codigo_modelo']) {
+
+            echo "<option value=" . $row1['codigo_modelo'] . " selected>" . $row1['codigo_modelo'] . " - " . $row1['descripcion'] . "</option>";
+          } else {
+
+            echo "<option value=" . $row1['codigo_modelo'] . ">" . $row1['codigo_modelo'] . " - " . $row1['descripcion'] . "</option>";
+          }
         }
       } catch (PDOException $e) {
-        //Casa de que ocurra algun error
+        //Cada de que ocurra algun error
         echo "Fallo el select " . $e->getMessage();
       }
 
@@ -166,10 +207,17 @@
 
         echo "<select id=tipo name=tipo>";
         while ($row1 = $matriz1->fetch()) {
-          echo "<option value=" . $row1['codigo_tipo'] . ">" . $row1['codigo_tipo'] . " - " . $row1['descripcion'] . "</option>";
+
+          if ($row1['codigo_tipo'] == $row['codigo_tipo']) {
+
+            echo "<option value=" . $row1['codigo_tipo'] . " selected>" . $row1['codigo_tipo'] . " - " . $row1['descripcion'] . "</option>";
+          } else {
+
+            echo "<option value=" . $row1['codigo_tipo'] . ">" . $row1['codigo_tipo'] . " - " . $row1['descripcion'] . "</option>";
+          }
         }
       } catch (PDOException $e) {
-        //Casa de que ocurra algun error
+        //Cada de que ocurra algun error
         echo "Fallo el select " . $e->getMessage();
       }
 
@@ -187,10 +235,17 @@
 
         echo "<select id=destinacion name=destinacion>";
         while ($row1 = $matriz1->fetch()) {
-          echo "<option value=" . $row1['codigo_destinacion'] . ">" . $row1['codigo_destinacion'] . " - " . $row1['descripcion'] . "</option>";
+
+          if ($row1['codigo_destinacion'] == $row['codigo_destinacion']) {
+
+            echo "<option value=" . $row1['codigo_destinacion'] . " selected>" . $row1['codigo_destinacion'] . " - " . $row1['descripcion'] . "</option>";
+          } else {
+
+            echo "<option value=" . $row1['codigo_destinacion'] . ">" . $row1['codigo_destinacion'] . " - " . $row1['descripcion'] . "</option>";
+          }
         }
       } catch (PDOException $e) {
-        //Casa de que ocurra algun error
+        //Cada de que ocurra algun error
         echo "Fallo el select " . $e->getMessage();
       }
 

@@ -28,7 +28,7 @@
 
     $selected = mysqli_select_db($dbhandle, 'colviviendas') or die("No se encontro el esquema");
 
-    $matriz = mysqli_query($dbhandle, "select a.identificacion, a.nombre, a.apellido, a.direccion, a.telefono, b.codigo_ciudad  as ciudad , b.descripcion, a.fecha_registro, c.descripcion as tipo_persona, a.contrasena, a.correo, a.foto from persona a, ciudad b, tipo_persona c where a.ciudad = b.codigo_ciudad AND c.codigo_tipo = a.tipo_persona AND a.identificacion =" . $vcodigo . ";");
+    $matriz = mysqli_query($dbhandle, "select a.identificacion, a.nombre, a.apellido, a.direccion, a.telefono, b.codigo_ciudad  as ciudad , b.descripcion, a.fecha_registro, c.codigo_tipo ,c.descripcion as tipo_persona, a.contrasena, a.correo, a.foto from persona a, ciudad b, tipo_persona c where a.ciudad = b.codigo_ciudad AND c.codigo_tipo = a.tipo_persona AND a.identificacion =" . $vcodigo . ";");
 
     while ($row = mysqli_fetch_array($matriz, MYSQLI_ASSOC)) {
       echo '<label for="identificacion" >Numero de identificación</label>';
@@ -67,7 +67,7 @@
           }
         }
       } catch (PDOException $e) {
-        //Casa de que ocurra algun error
+        //Cada de que ocurra algun error
         echo "Fallo el select " . $e->getMessage();
       }
 
@@ -84,12 +84,19 @@
     
         $matriz1 = $conexion->query("select * from tipo_persona Order by codigo_tipo");
 
-        echo "<select id=tipo name=tipo>";
+        echo "<select id=ciudad name=ciudad>";
         while ($row1 = $matriz1->fetch()) {
-          echo "<option value=" . $row1['codigo_tipo'] . ">" . $row1['codigo_tipo'] . " - " . $row1['descripcion'] . "</option>";
+
+          if ($row1['codigo_tipo'] == $row['codigo_tipo']) {
+
+            echo "<option value=" . $row1['codigo_tipo'] . " selected>" . $row1['codigo_tipo'] . " - " . $row1['descripcion'] . "</option>";
+          } else {
+
+            echo "<option value=" . $row1['codigo_tipo'] . ">" . $row1['codigo_tipo'] . " - " . $row1['descripcion'] . "</option>";
+          }
         }
       } catch (PDOException $e) {
-        //Casa de que ocurra algun error
+        //Cada de que ocurra algun error
         echo "Fallo el select " . $e->getMessage();
       }
 
