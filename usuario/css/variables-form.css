@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Montserrat:wght@300&family=Mooli&family=Noto+Sans:wght@200&family=Playfair+Display:ital@1&family=Playpen+Sans:wght@200&family=Roboto:ital,wght@1,100&family=Space+Grotesk&display=swap");
+
+/*archivos importados */
+/* @import "./registro.css"; */
+@import "./login.css";
+@import "./registro.css";
+
+/*Variables*/
+:root {
+    --color-text_registro: #fffffff5;
+    --color-text_login: #1b1b1b;
+    --margin-top: 1.875rem;
+    --gap: 4px;
+    --tittle_font-size: 2rem;
+    --margin-buttom: 5px;
+}
+
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "Dancing Script", cursive;
+    font-family: "Montserrat", sans-serif;
+    font-family: "Mooli", sans-serif;
+    font-family: "Noto Sans", sans-serif;
+    font-family: "Playfair Display", serif;
+    font-family: "Playpen Sans", cursive;
+    font-family: "Roboto", sans-serif;
+    font-family: "Space Grotesk", sans-serif;
+}

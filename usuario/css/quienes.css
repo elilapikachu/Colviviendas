@@ -1,0 +1,177 @@
+@keyframes texto {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* quienes somos */
+
+.quienes {
+  display: flex;
+  gap: 30px;
+  /* flex-wrap: wrap; */
+  width: 100%;
+  height: 550px;
+  background: linear-gradient(45deg, var(--color-3), var(--color-5));
+}
+
+.quienes__texto {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quienes__texto-tittle {
+  margin-top: 35px;
+  font-size: 70px;
+  color: var(--letra-color);
+  margin-left: 30px;
+}
+
+.quienes__texto-p {
+  font-size: 22px;
+  margin-left: 30px;
+  color: var(--color-1);
+  margin-bottom: 3px;
+}
+
+.quienes__imagen {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.quienes__imagen-img {
+  margin-right: 30px;
+  width: 400px;
+  height: 350px;
+  border-radius: 5px;
+}
+
+/* slogan */
+
+.slogan {
+  display: flex;
+  width: 100%;
+  height: 200px;
+  background: url(../img/quienes-somos/slogan-equipo.png);
+  background-position: center;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset -2px -21px 100px 5px rgba(38, 0, 82, 0.897);
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.slogan__tittle {
+  font-size: 50px;
+  color: var(--color-1);
+  text-align: center;
+  padding-right: 100%;
+  animation: texto 10s linear infinite;
+}
+
+/* misión y visión */
+
+.info {
+  width: 100%;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  background: url(../img/quienes-somos/informacion-misionvision.jpg);
+
+}
+
+.info__container {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  background-color: var(--color-4);
+  box-shadow: inset -2px -21px 100px 5px rgba(39, 198, 111, 0.897);
+  margin-left: 20px;
+
+}
+
+
+
+.info__textos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.info__textos-tittle {
+  font-size: 40px;
+  color: var(--color-1);
+  text-align: center;
+}
+
+.info__textos-parrafo {
+  font-size: 20px;
+  text-align: center;
+}
+
+.info__imagen {
+  display: flex;
+  justify-content: center;
+
+}
+.info__imagen-img{
+  width: 150px;
+  height: 150px;
+}
+/* nuestro equipo */
+
+.equipo {
+  width: 100%;
+  height: 500px;
+  background: url(../img/quienes-somos/fondo-equipo.png);
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.equipo__inicio {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.equipo__inicio-tittle {
+  font-size: 80px;
+  color: var(--color-1);
+}
+
+.equipo__container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.equipo__persona {
+  width: 40%;
+  height: 300px;
+  display: flex;
+  background: linear-gradient(var(--color-gris), var(--color-blanco));
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.equipo__persona-subtittle {
+  font-size: 30px;
+  color: var(--color-1);
+}

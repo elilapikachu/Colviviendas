@@ -38,15 +38,15 @@ tr:hover {
   gap: 15px;
 }
 
-/* .container__form {
+.container__form {
   display: flex;
   align-items: center;
   width: 100%;
   height: 50px;
   margin-left: 15px;
   margin-bottom: 10px;
-  /* background-color: #666; 
-} */
+  /* background-color: #666; */
+} 
 
 .container__label {
   font-size: 20px;

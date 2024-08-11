@@ -1,0 +1,60 @@
+main {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+form {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 600px;
+    width: 100%;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input, form select, form textarea {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+form textarea {
+    resize: vertical;
+}
+
+form input[type='submit'] {
+    background-color: #008f8c; /* Color principal para el botón */
+    border: none;
+    color: white;
+    font-size: 16px;
+    padding: 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form input[type='submit']:hover {
+    background-color: #004d40; /* Color más oscuro para el hover */
+}
+
+.contactenos__texto-h1{
+    color: #333;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.contactenos__texto{
+    background: linear-gradient(135deg, #008f8c, #004d40); /* Degradado para el header */
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}

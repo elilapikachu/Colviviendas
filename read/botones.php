@@ -10,13 +10,21 @@
 </head>
 
 <body>
+  <?php
 
+  session_start();
+  echo '
   <div class="letrero">
     <div class="letrero__contenido">
-      <h1 class="letrero__tittle">Bienvenido al Index.</h1>
+      <h1 class="letrero__tittle">Bienvenido al Index ' . $_SESSION['usuario'] . '</h1>
       <h2 class="letrero__subtittle">Colvivienda</h2>
-    </div>
+    </div>'; ?>
   </div>
+  <div class="letrero__cerrar">
+    <button class="letrero_cerrar-button" onclick="location.href='../usuario/cerrar.php'">Cerrar sesión</button>
+  </div>
+  </div>
+
   <div class="button-box">
     <div class="button-box2">
       <div class="button-container">

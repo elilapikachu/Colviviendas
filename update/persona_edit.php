@@ -14,6 +14,8 @@
   <div class="container__boton">
     <a href="../read/Persona.php">Devolver a Persona</a>
   </div>
+
+  
   <form action="persona_edit-sql.php" method="POST" enctype="multipart/form-data">
     <?php
     include_once "../modulo/conexion.php";
@@ -84,7 +86,7 @@
     
         $matriz1 = $conexion->query("select * from tipo_persona Order by codigo_tipo");
 
-        echo "<select id=ciudad name=ciudad>";
+        echo "<select id=tipo name=tipo>";
         while ($row1 = $matriz1->fetch()) {
 
           if ($row1['codigo_tipo'] == $row['codigo_tipo']) {
