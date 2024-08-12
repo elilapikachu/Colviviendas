@@ -1,25 +1,25 @@
-main {
+.main-contactenos {
     display: flex;
     justify-content: center;
     padding: 20px;
 }
 
-form {
+.contactenos-form {
     background: white;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 9px rgba(0, 0, 0, 0.1);
     padding: 20px;
     max-width: 600px;
     width: 100%;
 }
 
-form label {
+.contactenos-form label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
 }
 
-form input, form select, form textarea {
+.contactenos-form input, .contactenos-form select, .contactenos-form textarea {
     width: calc(100% - 22px);
     padding: 10px;
     border: 1px solid #ccc;
@@ -27,11 +27,11 @@ form input, form select, form textarea {
     margin-bottom: 15px;
 }
 
-form textarea {
+.contactenos-form textarea {
     resize: vertical;
 }
 
-form input[type='submit'] {
+.contactenos-form input[type='submit'] {
     background-color: #008f8c; /* Color principal para el botón */
     border: none;
     color: white;
@@ -42,7 +42,7 @@ form input[type='submit'] {
     transition: background-color 0.3s;
 }
 
-form input[type='submit']:hover {
+.contactenos-form input[type='submit']:hover {
     background-color: #004d40; /* Color más oscuro para el hover */
 }
 

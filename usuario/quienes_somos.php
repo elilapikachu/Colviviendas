@@ -5,45 +5,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/Modulo_inicio.css">
-    <title>¿Quienes Somos?</title>
+    <link rel="shortcut icon" href="./img/iconos/quienes.png" type="image/x-icon">
+    <title>Nosotros</title>
 </head>
+<?php
+session_start();
+
+?>
 
 <body>
     <header class="navbar">
-
         <nav class="navbar__container">
             <div class="navbar__logo">
-                <img src="./img/logo/Logo_colviviendas.jpeg" alt="Logo" class="navbar__logo-img">
+                <img src="./img/logo/Logo_colviviendas-recortado.jpg" alt="Logo" class="navbar__logo-img">
             </div>
             <ul class="navbar__menu">
-                <li class="navbar__elemet">
-                    <a href="index.html" class="navbar__link">Inicio</a>
+                <li class="navbar__element">
+                    <a href="index.php" class="navbar__link">Inicio</a>
                 </li>
                 <li class="navbar__element">
-                    <a href="" class="navbar__link">¿Quienes somos?</a>
+                    <a href="quienes_somos.php" class="navbar__link">Nosotros</a>
                 </li>
                 <li class="navbar__element">
-                    <a href="" class="navbar__link">Contactenos</a>
+                    <a href="./contactenos/contactenos.php" class="navbar__link">Contáctenos</a>
                 </li>
                 <li class="navbar__element">
                     <a href="" class="navbar__link">Blog</a>
                 </li>
-                <li class="navbar__element navbar__element-ul">
-                    <a href="" class="navbar__link">Propiedades</a>
-                    <ul class="navbar__vertical">
-                        <li class="navbar__vertical-element">
-                            <a href="login.html" class="navbar__vertical-link">Inicia sesion</a>
+                <li class="navbar__element dropdown">
+                    <a href="#" class="navbar__link">Propiedades</a>
+                    <ul class="dropdown__menu">
+                        <li>
+                            <a href="#" class="dropdown__link">Venta</a>
                         </li>
-                        <li class="navbar__vertical-element">
-                            <a href="registro.html" class="navbar__vertical-link">¡Registrate!</a>
+                        <li>
+                            <a href="#" class="dropdown__link">Compra</a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown__link">Alquiler</a>
                         </li>
                     </ul>
                 </li>
+                <?php
+                if (empty($_SESSION['usuario'])) {
+                    echo '
+                    <li class="navbar__element navbar__element-ul">
+                        <a href="login.php" class="navbar__link">Login</a>
+
+                    </li>';
+                } else {
+                    echo '
+                    <li class="navbar__element navbar__element-ul">
+                        <a href="cerrar.php" class="navbar__link">Cerrar</a>
+
+                    </li>';
+                }
+                ?>
             </ul>
         </nav>
-
     </header>
+
     <br><br><br><br><br><br><br><br><br>
+
     <section class="quienes">
         <div class="quienes__texto">
             <h1 class="quienes__texto-tittle">¿Quienes Somos?</h1>
@@ -70,12 +93,13 @@
             <img src="./img/quienes-somos/quienes-somos.jpg" alt="oficina" class="quienes__imagen-img">
         </div>
     </section>
-   
     <section class="info">
         <div class="info__container">
             <div class="info__textos">
                 <h1 class="info__textos-tittle">Misión</h1>
-                <p class="info__textos-parrafo">Nuestra misión es que las personas logren obtener una propiedad fácilmente, logrando cumplir sus sueños y aspiraciones, disfrutando de un espacio agradable, cómodo y cálido donde puedan formar un hogar.</p>
+                <p class="info__textos-parrafo">Nuestra misión es que las personas logren obtener una propiedad
+                    fácilmente, logrando cumplir sus sueños y aspiraciones, disfrutando de un espacio agradable, cómodo
+                    y cálido donde puedan formar un hogar.</p>
             </div>
             <div class="info__imagen">
                 <img src="./img/quienes-somos/archivar-factura.png" alt="misión" class="info__imagen-img">
@@ -89,7 +113,9 @@
         <div class="info__container">
             <div class="info__textos">
                 <h1 class="info__textos-tittle">Visión</h1>
-                <p class="info__textos-parrafo">Queremos expandirnos Mundialmente, ofreciendo nuestros servicios de inmobiliaria. Con esto tener más personas alrededor del mundo disfrutando de sus nuevos hogares, gracias a nuestra empresa.</p>
+                <p class="info__textos-parrafo">Queremos expandirnos Mundialmente, ofreciendo nuestros servicios de
+                    inmobiliaria. Con esto tener más personas alrededor del mundo disfrutando de sus nuevos hogares,
+                    gracias a nuestra empresa.</p>
             </div>
             <div class="info__imagen">
                 <img src="./img/quienes-somos/trofeo.png" alt="Visión" class="info__imagen-img">
@@ -97,7 +123,7 @@
         </div>
         <div class="info__linea">
             <div class="info__linea-container">
-                
+
             </div>
         </div>
     </section>
@@ -110,13 +136,13 @@
         </div>
         <div class="equipo__container">
             <div class="equipo__persona">
-                <img src="" alt="Equipo" class="equipo__persona-imagen">
+                <img src="./img/quienes-somos/juan.jpg" alt="Equipo" class="equipo__persona-imagen">
                 <h3 class="equipo__persona-subtittle">Juan Esteban Blandón Blandón</h3>
                 <p class="equipo__persona-parrafo">Encargado de las vistas del proyecto.</p>
 
             </div>
             <div class="equipo__persona">
-                <img src="" alt="Equipo" class="equipo__persona-imagen">
+                <img src="./img/quienes-somos/eliana.jpg" alt="Equipo" class="equipo__persona-imagen">
                 <h3 class="equipo__persona-subtittle">Eliana Perez Ramos</h3>
                 <p class="equipo__persona-parrafo">Encargada de las funcionalidades del proyecto.</p>
 

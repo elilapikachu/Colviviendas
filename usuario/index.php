@@ -4,73 +4,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/Modulo_inicio.css">
     <link rel="shortcut icon" href="./img/iconos/hogar.png" type="image/x-icon">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
     <title>Index</title>
 </head>
+<?php
+
+include_once "../modulo/conexion.php";
+
+session_start();
+
+?>
 
 <body>
     <header class="navbar">
-        <?php
-        session_start();
-
-        ?>
         <nav class="navbar__container">
             <div class="navbar__logo">
-                <img src="./img/logo/Logo_colviviendas.jpeg" alt="Logo" class="navbar__logo-img">
+                <img src="./img/logo/Logo_colviviendas-recortado.jpg" alt="Logo" class="navbar__logo-img">
             </div>
             <ul class="navbar__menu">
-                <li class="navbar__elemet">
+                <li class="navbar__element">
                     <a href="index.php" class="navbar__link">Inicio</a>
                 </li>
                 <li class="navbar__element">
-                    <a href="" class="navbar__link">¿Quienes somos?</a>
+                    <a href="quienes_somos.php" class="navbar__link">Nosotros</a>
                 </li>
                 <li class="navbar__element">
-                    <a href="./contactenos/contactenos.php" class="navbar__link">Contactenos</a>
+                    <a href="./contactenos/contactenos.php" class="navbar__link">Contáctenos</a>
                 </li>
                 <li class="navbar__element">
                     <a href="" class="navbar__link">Blog</a>
                 </li>
-                <li class="navbar__element navbar__element-ul">
-                    <a href="" class="navbar__link">Propiedades</a>
-
+                <li class="navbar__element dropdown">
+                    <a href="#" class="navbar__link">Propiedades</a>
+                    <ul class="dropdown__menu">
+                        <li><a href="#" class="dropdown__link">Venta</a></li>
+                        <li><a href="#" class="dropdown__link">Compra</a></li>
+                        <li><a href="#" class="dropdown__link">Alquiler</a></li>
+                    </ul>
                 </li>
                 <?php
                 if (empty($_SESSION['usuario'])) {
                     echo '
-                <li class="navbar__element navbar__element-ul">
-                    <a href="login.php" class="navbar__link">Login</a>
+                    <li class="navbar__element navbar__element-ul">
+                        <a href="login.php" class="navbar__link">Login</a>
 
-                </li>';
-                }
-                ?>
-                <?php
-                if (!empty($_SESSION['usuario'])) {
+                    </li>';
+                } else {
                     echo '
-                <li class="navbar__element navbar__element-ul">
-                    <a href="cerrar.php" class="navbar__link">Cerrar</a>
+                    <li class="navbar__element navbar__element-ul">
+                        <a href="cerrar.php" class="navbar__link">Cerrar</a>
 
-                </li>';
+                    </li>';
                 }
                 ?>
             </ul>
         </nav>
-
     </header>
     <main>
         <br><br><br><br><br><br><br><br><br><br><br><br>
 
-        <div class="carousel" style="padding: 10px; border: 1px solid #000; width: 100%;">
+        <div class="carousel" >
             <div class="carousel__cartel">
                 <?php
                 if (!empty($_SESSION['usuario'])) {
                     echo '
                 <div class="carousel__cartel-texto">
                     <h1 class="carousel__cartel-tittle">Bienvenido ' . $_SESSION['usuario'] . '</h1>
+                    <p class="carousel__cartel-parrafo">Colviviendas</p>
                 </div>';
                 }
                 ?>
@@ -188,10 +192,19 @@
                 </div>
                 <div class="buscar__select">
                     <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <?php
+                        try {
+                            // Ejecutando sql
+                        
+                            $matriz = $conexion->query("select * from tipo_propiedad Order by codigo_tipo;");
+                            while ($row = $matriz->fetch()) {
+                                echo "<option value=" . $row['codigo'] . ">" . $row['descripcion'] . "</option>";
+                            }
+                        } catch (PDOException $e) {
+                            //Cada de que ocurra algun error
+                            echo "Fallo el select " . $e->getMessage();
+                        }
+                        ?>
                     </select>
                 </div>
             </div>

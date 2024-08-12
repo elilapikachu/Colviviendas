@@ -86,7 +86,6 @@
   align-items: center;
   gap: 20px;
   background: url(../img/quienes-somos/informacion-misionvision.jpg);
-
 }
 
 .info__container {
@@ -97,10 +96,7 @@
   background-color: var(--color-4);
   box-shadow: inset -2px -21px 100px 5px rgba(39, 198, 111, 0.897);
   margin-left: 20px;
-
 }
-
-
 
 .info__textos {
   display: flex;
@@ -124,9 +120,8 @@
 .info__imagen {
   display: flex;
   justify-content: center;
-
 }
-.info__imagen-img{
+.info__imagen-img {
   width: 150px;
   height: 150px;
 }
@@ -134,7 +129,7 @@
 
 .equipo {
   width: 100%;
-  height: 500px;
+  height: 640px;
   background: url(../img/quienes-somos/fondo-equipo.png);
   background-position: center;
   display: flex;
@@ -163,12 +158,20 @@
 
 .equipo__persona {
   width: 40%;
-  height: 300px;
+  height: 460px;
   display: flex;
   background: linear-gradient(var(--color-gris), var(--color-blanco));
   flex-direction: column;
   gap: 10px;
   align-items: center;
+}
+
+.equipo__persona-imagen {
+  width: 300px;
+  height: 350px;
+  margin-top: 20px;
+  border-radius: 5%;
+  box-shadow: -16px 0px 19px 0px rgb(89, 113, 125);
 }
 
 .equipo__persona-subtittle {

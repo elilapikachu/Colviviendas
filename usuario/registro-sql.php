@@ -18,8 +18,9 @@ try {
 
     session_start();
     $_SESSION['usuario'] = $vnombre;
+    $_SESSION['usuario-apellido'] = $vapellido;
     $_SESSION['tipo_persona'] = $vtipo_persona;
-    $_SESSION['id'] = $videntificacion;
+    $_SESSION['identificacion'] = $videntificacion;
 
     $insertar = $conexion->prepare("insert into persona (
         identificacion, 

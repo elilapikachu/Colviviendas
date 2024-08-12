@@ -1,11 +1,11 @@
 <?php
-
+session_start();
 
 // solo ejecuta cuando todas los campos de la forma están llenos
 //por eso pregunto si todos son diferentes de vacío
 
 if (!empty($_GET["mensaje"]) && !empty($_GET["nombre"]) && !empty($_GET["correo"]) && !empty($_GET["tel"]) && !empty($_GET["asunto"])) {
-  
+
     $recibe = $_GET["correo"] . ",colviviendasjuntosportuhogar@gmail.com";
     $asunto = "Contacto con la empresa Colviviendas"; // cambiar el asunto según el proyecto
     $cuerpo = "Se recibe correo con el siguiente contenido:  " . $_GET["asunto"] . "," . $_GET["mensaje"] . "," . $_GET["nombre"] . "," . $_GET["tel"] . "," . $_GET["correo"];
@@ -47,49 +47,49 @@ if (!empty($_GET["mensaje"]) && !empty($_GET["nombre"]) && !empty($_GET["correo"
 </head>
 
 <body>
-    <header class="navbar">
+<header class="navbar">
         <nav class="navbar__container">
             <div class="navbar__logo">
-                <img src="../img/logo/Logo_colviviendas.jpeg" alt="Logo" class="navbar__logo-img">
+                <img src="../img/logo/Logo_colviviendas-recortado.jpg" alt="Logo" class="navbar__logo-img">
             </div>
             <ul class="navbar__menu">
-                <li class="navbar__elemet">
-                    <a href="index.php" class="navbar__link">Inicio</a>
+                <li class="navbar__element">
+                    <a href="../index.php" class="navbar__link">Inicio</a>
                 </li>
                 <li class="navbar__element">
-                    <a href="" class="navbar__link">¿Quienes somos?</a>
+                    <a href="../quienes_somos.php" class="navbar__link">Nosotros</a>
                 </li>
                 <li class="navbar__element">
-                    <a href="./contactenos/contactenos.php" class="navbar__link">Contactenos</a>
+                    <a href="contactenos.php" class="navbar__link">Contáctenos</a>
                 </li>
                 <li class="navbar__element">
                     <a href="" class="navbar__link">Blog</a>
                 </li>
-                <li class="navbar__element navbar__element-ul">
-                    <a href="" class="navbar__link">Propiedades</a>
-
+                <li class="navbar__element  dropdown">
+                    <a href="#" class="navbar__link">Propiedades</a>
+                    <ul class="dropdown__menu">
+                        <li><a href="#" class="dropdown__link">Venta</a></li>
+                        <li><a href="#" class="dropdown__link">Compra</a></li>
+                        <li><a href="#" class="dropdown__link">Alquiler</a></li>
+                    </ul>
                 </li>
                 <?php
                 if (empty($_SESSION['usuario'])) {
                     echo '
-                <li class="navbar__element navbar__element-ul">
-                    <a href="login.php" class="navbar__link">Login</a>
+                    <li class="navbar__element navbar__element-ul">
+                        <a href="login.php" class="navbar__link">Login</a>
 
-                </li>';
-                }
-                ?>
-                <?php
-                if (!empty($_SESSION['usuario'])) {
+                    </li>';
+                } else {
                     echo '
-                <li class="navbar__element navbar__element-ul">
-                    <a href="cerrar.php" class="navbar__link">Cerrar</a>
+                    <li class="navbar__element navbar__element-ul">
+                        <a href="cerrar.php" class="navbar__link">Cerrar</a>
 
-                </li>';
+                    </li>';
                 }
                 ?>
             </ul>
         </nav>
-
     </header>
 
 
@@ -97,9 +97,9 @@ if (!empty($_GET["mensaje"]) && !empty($_GET["nombre"]) && !empty($_GET["correo"
     <div class="contactenos__texto">
         <h1 class="contactenos__texto-h1"> Contáctenos </h1>
     </div>
-    <main>
+    <main class="main-contactenos">
 
-        <form id='miforma' action='contactenos.php' method='GET'>
+        <form  class="contactenos-form" id='miforma' action='contactenos.php' method='GET'>
 
             <label for='asunto'>Asunto:</label>
             <select id="asunto" name="asunto">
