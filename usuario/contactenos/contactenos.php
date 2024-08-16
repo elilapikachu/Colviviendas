@@ -47,7 +47,7 @@ if (!empty($_GET["mensaje"]) && !empty($_GET["nombre"]) && !empty($_GET["correo"
 </head>
 
 <body>
-<header class="navbar">
+    <header class="navbar">
         <nav class="navbar__container">
             <div class="navbar__logo">
                 <img src="../img/logo/Logo_colviviendas-recortado.jpg" alt="Logo" class="navbar__logo-img">
@@ -62,13 +62,30 @@ if (!empty($_GET["mensaje"]) && !empty($_GET["nombre"]) && !empty($_GET["correo"
                 <li class="navbar__element">
                     <a href="contactenos.php" class="navbar__link">Contáctenos</a>
                 </li>
-                <li class="navbar__element">
-                    <a href="" class="navbar__link">Blog</a>
-                </li>
-                <li class="navbar__element  dropdown">
+                <?php
+                if ($_SESSION['tipo_persona'] == '01') {
+                    echo '
+                    <li class="navbar__element">
+                    <a href="../venta-propiedad/propiedades-vendedor.php" class="navbar__link">Mis propiedades</a></li>';
+                } else {
+                    echo '
+                    <li >
+                        <a href="" class="navbar__link">Blog</a>
+                    </li>';
+                }
+                ?>
+
+                <li class="navbar__element dropdown">
                     <a href="#" class="navbar__link">Propiedades</a>
                     <ul class="dropdown__menu">
-                        <li><a href="#" class="dropdown__link">Venta</a></li>
+                        <li><a href="../carrito.php" class="dropdown__link">Carrito</a></li>
+                        <?php
+                        if ($_SESSION['tipo_persona'] == '01') {
+                            echo '
+                            <li><a href="../venta-propiedad/venta.php" class="dropdown__link">Venta</a></li>';
+                        }
+                        ?>
+
                         <li><a href="#" class="dropdown__link">Compra</a></li>
                         <li><a href="#" class="dropdown__link">Alquiler</a></li>
                     </ul>
@@ -77,14 +94,17 @@ if (!empty($_GET["mensaje"]) && !empty($_GET["nombre"]) && !empty($_GET["correo"
                 if (empty($_SESSION['usuario'])) {
                     echo '
                     <li class="navbar__element navbar__element-ul">
-                        <a href="login.php" class="navbar__link">Login</a>
-
+                        <a href="../login.php" class="navbar__link">Login</a>
                     </li>';
                 } else {
                     echo '
                     <li class="navbar__element navbar__element-ul">
-                        <a href="cerrar.php" class="navbar__link">Cerrar</a>
+                        <a href="" class="navbar__link">' . $_SESSION['usuario'] . '</a>
+                    </li>';
 
+                    echo '
+                    <li class="navbar__element navbar__element-ul">
+                        <a href="../cerrar.php" class="navbar__link">Cerrar</a>
                     </li>';
                 }
                 ?>
@@ -93,13 +113,13 @@ if (!empty($_GET["mensaje"]) && !empty($_GET["nombre"]) && !empty($_GET["correo"
     </header>
 
 
-    <br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br>
     <div class="contactenos__texto">
         <h1 class="contactenos__texto-h1"> Contáctenos </h1>
     </div>
     <main class="main-contactenos">
 
-        <form  class="contactenos-form" id='miforma' action='contactenos.php' method='GET'>
+        <form class="contactenos-form" id='miforma' action='contactenos.php' method='GET'>
 
             <label for='asunto'>Asunto:</label>
             <select id="asunto" name="asunto">

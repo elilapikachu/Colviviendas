@@ -29,21 +29,32 @@ session_start();
                 <li class="navbar__element">
                     <a href="./contactenos/contactenos.php" class="navbar__link">Contáctenos</a>
                 </li>
-                <li class="navbar__element">
-                    <a href="" class="navbar__link">Blog</a>
-                </li>
+                <?php
+                if ($_SESSION['tipo_persona'] == '01') {
+                    echo '
+                    <li class="navbar__element">
+                    <a href="./venta-propiedad/propiedades-vendedor.php" class="navbar__link">Mis propiedades</a></li>';
+                }else{
+                    echo '
+                    <li >
+                        <a href="" class="navbar__link">Blog</a>
+                    </li>';
+                }
+                ?>
+                
                 <li class="navbar__element dropdown">
                     <a href="#" class="navbar__link">Propiedades</a>
                     <ul class="dropdown__menu">
-                        <li>
-                            <a href="#" class="dropdown__link">Venta</a>
-                        </li>
-                        <li>
-                            <a href="#" class="dropdown__link">Compra</a>
-                        </li>
-                        <li>
-                            <a href="#" class="dropdown__link">Alquiler</a>
-                        </li>
+                        <li><a href="carrito.php" class="dropdown__link">Carrito</a></li>
+                        <?php
+                        if ($_SESSION['tipo_persona'] == '01') {
+                            echo '
+                            <li><a href="./venta-propiedad/venta.php" class="dropdown__link">Venta</a></li>';
+                        }
+                        ?>
+
+                        <li><a href="#" class="dropdown__link">Compra</a></li>
+                        <li><a href="#" class="dropdown__link">Alquiler</a></li>
                     </ul>
                 </li>
                 <?php
@@ -51,21 +62,25 @@ session_start();
                     echo '
                     <li class="navbar__element navbar__element-ul">
                         <a href="login.php" class="navbar__link">Login</a>
-
                     </li>';
                 } else {
                     echo '
                     <li class="navbar__element navbar__element-ul">
-                        <a href="cerrar.php" class="navbar__link">Cerrar</a>
-
+                        <a href="" class="navbar__link">' . $_SESSION['usuario'] . '</a>
                     </li>';
+
+                    echo '
+                    <li class="navbar__element navbar__element-ul">
+                        <a href="cerrar.php" class="navbar__link">Cerrar</a>
+                    </li>';
+
                 }
                 ?>
             </ul>
         </nav>
     </header>
 
-    <br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br>
 
     <section class="quienes">
         <div class="quienes__texto">

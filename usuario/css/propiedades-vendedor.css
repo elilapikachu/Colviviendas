@@ -1,0 +1,75 @@
+.propiedades {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: calc(auto + 50px);
+  background: var(--color-4);
+}
+
+/* encabezado */
+
+.propiedades__encabezado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.propiedades__encabezado-tittle {
+  color: var(--color-1);
+  font-size: 50px;
+}
+
+.propiedades__encabezado-subtittle {
+  color: var(--color-gris);
+}
+
+/* tarjetas de propiedades */
+
+.propiedades__container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.propiedades__card {
+  background-color: var(--color-blanco);
+  display: flex;
+  border-radius: 5px;
+  margin-top: 20px;
+  gap: 30px;
+  width: 45%;
+  height: 350px;
+  box-shadow: 10px 10px 26px 5px rgba(0, 0, 0, 0.75);
+}
+
+.propiedades__card-textos {
+  margin-left: 30px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.propiedades__card-textos-titulo{
+  margin-bottom: 2px;
+}
+
+.propiedades__card-textos-descripcion{
+  margin-bottom: 2px;
+}
+
+.propiedades__card-imagen{
+  margin-right: 25px;
+  margin-top: 30px;
+}
+
+.propiedades__card-imagen-img{
+  width: 250px;
+  height: 280px;
+  border-radius: 10px;
+}
+
+
