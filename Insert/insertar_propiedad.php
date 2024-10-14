@@ -46,6 +46,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES["foto"])) {
     $vtipo = filter_var($_POST["tipo"]);
     $vedad = filter_var($_POST["edad"]);
     $vdestinacion = filter_var($_POST["destinacion"]);
+    $vmetros = filter_var($_POST["metro"]);
+    $vhabitacion = filter_var($_POST["habitacion"]);
+    $vbano = filter_var($_POST["bano"]);
+    $vgaraje = filter_var($_POST["garaje"]);
     $vfecha = filter_var($_POST["fecha"]);
 
 
@@ -68,9 +72,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES["foto"])) {
         fecha_registro,
         tipo_propiedad,	
         edad,	
-        destinacion
+        destinacion,
+        nro_metros,
+        nro_banos,
+        nro_habitaciones,
+        nro_garajes
        )
-        values (:codigo,:direcci,:foto,:esta,:propie,:met_pago,:ciuda,:barri,:precio,:modelo,:fecha,:tipo,:edad,:desti)");
+        values (:codigo,:direcci,:foto,:esta,:propie,:met_pago,:ciuda,:barri,:precio,:modelo,:fecha,:tipo,:edad,:desti,:nro_metros,:nro_banos,:nro_habitaciones,:nro_garajes)");
 
     //Aqui se añaden los valores de las variables al insert
 
@@ -89,6 +97,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES["foto"])) {
     $insertar->bindParam(':tipo', $vtipo);
     $insertar->bindParam(':edad', $vedad);
     $insertar->bindParam(':desti', $vdestinacion);
+    $insertar->bindParam(':nro_metros', $vmetros);
+    $insertar->bindParam(':nro_banos', $vbano);
+    $insertar->bindParam(':nro_habitaciones', $vhabitacion);
+    $insertar->bindParam(':nro_garajes', $vgaraje);
 
     $insertar->execute();
 
@@ -98,16 +110,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES["foto"])) {
     //Error;
     $error = $e->getCode();
 
-    // if ($error==23000){
-//   echo '<script>confirmar=confirm("Ese codigo de propiedad ya existe");
-//           if (confirmar)
-//             window.location.href="insertar_propiedad-forma.php";</script>';
-//           echo "<a href= insertar_propiedad-forma.php>Volver</a>";
-// }else{
-    echo 'Error' . $e->getMessage();
-    echo 'Error' . $e->getCode();
-    echo "<a href= insertar_propiedad-forma.php> Volver</a>";
-    // }
+    if ($error == 23000) {
+      echo '<script>confirmar=confirm("Ese codigo de propiedad ya existe");
+          if (confirmar)
+         window.location.href="insertar_propiedad-forma.php";</script>';
+      echo "<a href= insertar_propiedad-forma.php>Volver</a>";
+    } else {
+      echo 'Error' . $e->getMessage();
+      echo 'Error' . $e->getCode();
+      echo "<a href= insertar_propiedad-forma.php> Volver</a>";
+      // }
+    }
   }
 } else {
   echo '<script>confirmar=confirm("Llene el campo foto");

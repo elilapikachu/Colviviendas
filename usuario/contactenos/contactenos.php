@@ -28,7 +28,7 @@ if (!empty($_GET["mensaje"]) && !empty($_GET["nombre"]) && !empty($_GET["correo"
 
 
 } else {
-    echo '<script>alert("Debe llenar todos los campos.");</script>';
+    // echo '<script>alert("Debe llenar todos los campos.");</script>';
 }
 ?>
 
@@ -60,51 +60,64 @@ if (!empty($_GET["mensaje"]) && !empty($_GET["nombre"]) && !empty($_GET["correo"
                     <a href="../quienes_somos.php" class="navbar__link">Nosotros</a>
                 </li>
                 <li class="navbar__element">
-                    <a href="contactenos.php" class="navbar__link">Contáctenos</a>
+                    <a href="../contactenos/contactenos.php" class="navbar__link">Contáctenos</a>
                 </li>
                 <?php
-                if ($_SESSION['tipo_persona'] == '01') {
-                    echo '
+                if (!empty($_SESSION['usuario'])) {
+                    if ($_SESSION['tipo_persona'] == '01' || $_SESSION['tipo_persona'] == '04') {
+                        echo '
                     <li class="navbar__element">
                     <a href="../venta-propiedad/propiedades-vendedor.php" class="navbar__link">Mis propiedades</a></li>';
-                } else {
-                    echo '
-                    <li >
-                        <a href="" class="navbar__link">Blog</a>
-                    </li>';
+                    } else {
+                        echo '
+                        <li class="navbar__element">
+                            <a href="../blog/blog.php" class="navbar__link">Blog</a>
+                        </li>';
+                    }
                 }
-                ?>
 
+
+                if (!empty($_SESSION['usuario'])) {
+                    echo '
                 <li class="navbar__element dropdown">
                     <a href="#" class="navbar__link">Propiedades</a>
-                    <ul class="dropdown__menu">
-                        <li><a href="../carrito.php" class="dropdown__link">Carrito</a></li>
-                        <?php
-                        if ($_SESSION['tipo_persona'] == '01') {
+                    <ul class="dropdown__menu">';
+
+
+
+                    if (!empty($_SESSION['usuario'])) {
+                        echo '<li><a href="../carrito.php" class="dropdown__link">Carrito</a></li>';
+                    }
+
+                    if (!empty($_SESSION['usuario'])) {
+                        if ($_SESSION['tipo_persona'] == '01' || $_SESSION['tipo_persona'] == '04') {
                             echo '
                             <li><a href="../venta-propiedad/venta.php" class="dropdown__link">Venta</a></li>';
                         }
-                        ?>
+                    }
 
-                        <li><a href="#" class="dropdown__link">Compra</a></li>
-                        <li><a href="#" class="dropdown__link">Alquiler</a></li>
+                    echo '
+                        <li><a href="../venta-usuario.php" class="dropdown__link">Compra</a></li>
+                        <li><a href="../arrendamiento.php" class="dropdown__link">Alquiler</a></li>
                     </ul>
-                </li>
-                <?php
+                </li>';
+                }
+
                 if (empty($_SESSION['usuario'])) {
                     echo '
-                    <li class="navbar__element navbar__element-ul">
-                        <a href="../login.php" class="navbar__link">Login</a>
+                    <li class="navbar__element navbar__element-ul ">
+                        <a href="../login.php" class="navbar__link ">Login</a>
+
                     </li>';
                 } else {
                     echo '
                     <li class="navbar__element navbar__element-ul">
-                        <a href="" class="navbar__link">' . $_SESSION['usuario'] . '</a>
+                        <a href="../usuario.php" class="navbar__link">' . $_SESSION['usuario'] . '</a>
                     </li>';
 
                     echo '
-                    <li class="navbar__element navbar__element-ul">
-                        <a href="../cerrar.php" class="navbar__link">Cerrar</a>
+                    <li class="navbar__element navbar__element-ul ">
+                        <a href="../cerrar.php" class="navbar__link ">Cerrar</a>
                     </li>';
                 }
                 ?>
@@ -113,7 +126,7 @@ if (!empty($_GET["mensaje"]) && !empty($_GET["nombre"]) && !empty($_GET["correo"
     </header>
 
 
-    <br><br><br><br><br><br><br>
+    <br><br><br><br><br>
     <div class="contactenos__texto">
         <h1 class="contactenos__texto-h1"> Contáctenos </h1>
     </div>

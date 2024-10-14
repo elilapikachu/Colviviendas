@@ -1,13 +1,17 @@
+/* General */
+:root {
+  --transition-speed: 0.3s;
+}
+
 .propiedades {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: calc(auto + 50px);
-  background: var(--color-4);
+  background:linear-gradient(135deg, #cffffe, #229c9a); /* Degradado para el header */
+  animation: fadeIn 1.5s ease-in-out
 }
 
-/* encabezado */
-
+/* Encabezado */
 .propiedades__encabezado {
   display: flex;
   flex-direction: column;
@@ -18,32 +22,51 @@
 .propiedades__encabezado-tittle {
   color: var(--color-1);
   font-size: 50px;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease
+}
+
+.propiedades__encabezado-tittle:hover {
+  transform: scale(1.1);
+  color: var(--color-6);
 }
 
 .propiedades__encabezado-subtittle {
   color: var(--color-gris);
+  font-size: 24px;
+  transition: transform 0.3s ease;
 }
 
-/* tarjetas de propiedades */
-
+.propiedades__encabezado-subtittle:hover{
+  transform: scale(1.2);
+  color: var(--color-3);
+}
+/* Tarjetas de propiedades */
 .propiedades__container {
-  width: 100%;
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
-  margin-top: 20px;
   flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
+  gap: 20px;
 }
 
 .propiedades__card {
   background-color: var(--color-blanco);
   display: flex;
-  border-radius: 5px;
-  margin-top: 20px;
+  border-radius: 10px;
   gap: 30px;
   width: 45%;
   height: 350px;
-  box-shadow: 10px 10px 26px 5px rgba(0, 0, 0, 0.75);
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+  cursor: pointer;
+}
+
+.propiedades__card:hover {
+  transform: scale(1.05);
+  box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .propiedades__card-textos {
@@ -51,25 +74,47 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  flex-grow: 1;
+  transition: transform 0.3s ease;
 }
 
-.propiedades__card-textos-titulo{
+.propiedades__card-textos:hover {
+  transform: scale(1.05);
+}
+
+.propiedades__card-textos-container h4 {
+  color: var(--color-1);
   margin-bottom: 2px;
 }
 
-.propiedades__card-textos-descripcion{
-  margin-bottom: 2px;
+.propiedades__card-textos-container p {
+  margin-bottom: 8px;
+  color: var(--color-gris);
 }
 
-.propiedades__card-imagen{
-  margin-right: 25px;
+.propiedades__card-imagen {
+  margin-right: 30px;
   margin-top: 30px;
+  overflow: visible;
+  border-radius: 10px;
+  transition: transform var(--transition-speed);
 }
 
-.propiedades__card-imagen-img{
-  width: 250px;
+.propiedades__card-imagen-img {
+  width: 210px;
   height: 280px;
   border-radius: 10px;
+  transition: transform var(--transition-speed);
 }
 
+.propiedades__card:hover .propiedades__card-imagen-img {
+  transform: scale(1.1);
+}
 
+.propiedades__card-imagen:hover .propiedades__card-imagen-img {
+  transform: scale(1.15);
+}
+
+.propiedades__card:hover .propiedades__card-imagen {
+  transform: scale(1.05);
+}

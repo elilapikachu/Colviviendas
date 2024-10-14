@@ -71,7 +71,7 @@
 
                             echo "<select id=tipo name=tipo class='register__select'>";
                             while ($row = $matriz->fetch()) {
-                                echo "<option value=" . $row['codigo_tipo'] . ">" . $row['codigo_tipo'] . " - " . $row['descripcion'] . "</option>";
+                                echo "<option value=" . $row['codigo_tipo'] . ">" . $row['descripcion'] . "</option>";
                             }
                         } catch (PDOException $e) {
                             //Casa de que ocurra algun error
@@ -83,7 +83,7 @@
                         ?>
                     </div>
                     <div class="register__input">
-                        <ion-icon class="register__icon" name="lock-closed-outline"></ion-icon>
+                        <ion-icon id="togglePassword" class="register__icon" name="lock-closed-outline"></ion-icon>
                         <label for="contrasena" class="register__label">contraseña</label>
                         <input type="password" name="contrasena" class="register__input-text" id="contrasena"
                             required />
@@ -102,6 +102,10 @@
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-</body>
+    <!-- Agregar el script para mostrar y ocultar la contraseña -->
 
-</html>
+    <script src="./js/candado.js"></script>
+
+</body >
+
+</html >

@@ -27,7 +27,7 @@
 
     $selected = mysqli_select_db($dbhandle, 'colviviendas') or die("No se encontro el esquema");
 
-    $matriz = mysqli_query($dbhandle, "SELECT a.codigo_propiedad, a.direccion, a.foto, b.codigo_estado ,b.descripcion as estado, c.identificacion, d.codigo_metodo ,d.descripcion, e.codigo_ciudad, e.descripcion as ciudad, f.codigo_barrio ,f.descripcion as barrio, a.precio, g.codigo_modelo, g.descripcion as modelo, a.fecha_registro, h.codigo_tipo , h.descripcion as tipo_propiedad, a.edad, i.codigo_destinacion, i.descripcion as destinacion FROM propiedad a, estado b, persona c, metodo_pago d, ciudad e, barrio f, modelo g, tipo_propiedad h, destinacion i where a.estado = b.codigo_estado and a.propietario = c.identificacion and a.metodo_pago = d.codigo_metodo and a.ciudad = e.codigo_ciudad and a.barrio = f.codigo_barrio and a.modelo = g.codigo_modelo and a.tipo_propiedad = h.codigo_tipo and a.destinacion = i.codigo_destinacion and a.codigo_propiedad = '" . $vcodigo . "';");
+    $matriz = mysqli_query($dbhandle, "SELECT a.codigo_propiedad, a.direccion, a.foto, b.codigo_estado, a.nro_habitaciones, a.nro_banos, a.nro_garajes, a.nro_metros ,b.descripcion as estado, c.identificacion, d.codigo_metodo ,d.descripcion, e.codigo_ciudad, e.descripcion as ciudad, f.codigo_barrio ,f.descripcion as barrio, a.precio, g.codigo_modelo, g.descripcion as modelo, a.fecha_registro, h.codigo_tipo , h.descripcion as tipo_propiedad, a.edad, i.codigo_destinacion, i.descripcion as destinacion FROM propiedad a, estado b, persona c, metodo_pago d, ciudad e, barrio f, modelo g, tipo_propiedad h, destinacion i where a.estado = b.codigo_estado and a.propietario = c.identificacion and a.metodo_pago = d.codigo_metodo and a.ciudad = e.codigo_ciudad and a.barrio = f.codigo_barrio and a.modelo = g.codigo_modelo and a.tipo_propiedad = h.codigo_tipo and a.destinacion = i.codigo_destinacion and a.codigo_propiedad = '" . $vcodigo . "';");
 
     while ($row = mysqli_fetch_array($matriz, MYSQLI_ASSOC)) {
 
@@ -250,6 +250,19 @@
       }
 
       echo "</select>";
+
+      echo '<label for="metro" >Metros de la propiedad</label>';
+      echo "<input type='int' id='metro' name='metro' value='" . $row['nro_metros'] . "'>";
+
+      echo '<label for="habitacion" >Habitaciones de la propiedad</label>';
+      echo "<input type='int' id='habitacion' name='habitacion' value='" . $row['nro_habitaciones'] . "'>";
+
+
+      echo '<label for="bano" >Baños de la propiedad</label>';
+      echo "<input type='int' id='bano' name='bano' value='" . $row['nro_banos'] . "'>";
+
+      echo '<label for="garaje" >Garajes de la propiedad</label>';
+      echo "<input type='int' id='garaje' name='garaje' value='" . $row['nro_garajes'] . "'>";
 
       echo '<label for="fecha" >fecha de registro de la propiedad</label>';
       echo "<input type='text' id='fecha' name='fecha'  value='" . $row['fecha_registro'] . "' readonly>";

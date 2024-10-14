@@ -5,13 +5,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/Modulo_inicio.css">
-  <title>Document</title>
+  <title>Vender</title>
 </head>
 <?php
 
 include_once "../modulo/conexion.php";
 
 session_start();
+
+if (empty($_SESSION['identificacion'])) {
+  echo '
+    <script>
+    alert("Debe iniciar sesion o registrarse para acceder aqui.");
+    window.location.href="../login.php";
+    </script>';
+}
 
 ?>
 
@@ -40,187 +48,206 @@ session_start();
           <ul class="dropdown__menu">
             <li><a href="../carrito.php" class="dropdown__link">Carrito</a></li>
             <li><a href="venta.php" class="dropdown__link">Venta</a></li>
-            <li><a href="#" class="dropdown__link">Compra</a></li>
-            <li><a href="#" class="dropdown__link">Alquiler</a></li>
+            <li><a href="../venta-usuario.php" class="dropdown__link">Compra</a></li>
+            <li><a href="../arrendamiento.php" class="dropdown__link">Alquiler</a></li>
           </ul>
         </li>
         <?php
         if (empty($_SESSION['usuario'])) {
           echo '
           <li class="navbar__element navbar__element-ul">
-          <a href="login.php" class="navbar__link ">Login</a>
+          <a href="../login.php" class="navbar__link ">Login</a>
           </li>';
-          
+
         } else {
           echo '
           <li class="navbar__element navbar__element-ul">
-            <a href="" class="navbar__link">' . $_SESSION['usuario'] . '</a>
+            <a href="../usuario.php" class="navbar__link">' . $_SESSION['usuario'] . '</a>
           </li>';
           echo '
           <li class="navbar__element navbar__element-ul ">
-            <a href="cerrar.php" class="navbar__link ">Cerrar</a>
+            <a href="../cerrar.php" class="navbar__link ">Cerrar</a>
           </li>';
         }
         ?>
       </ul>
     </nav>
   </header>
-  <br><br><br><br><br><br><br><br><br><br><br>
+  <br><br><br><br><br>
   <div class="venta-propiedad">
-    <form action="venta-sql.php" method="POST" enctype="multipart/form-data" class="venta-propiedad">
+    <form action="venta-sql.php" class="venta-propiedad__form" method="POST" enctype="multipart/form-data">
+      <div class="venta-propiedad__inputs">
+        <?php
 
-      <?php
+        echo '<label for="direccion">Direccion de la propiedad</label>';
+        echo "<input type='text' id='direccion' name='direccion' value=''>";
 
-      echo '<label for="direccion">Direccion de la propiedad</label>';
-      echo "<input type='text' id='direccion' name='direccion' value=''>";
+        echo '<label for="foto" >Foto de la propiedad</label>';
+        echo "<input type='file' id='foto' name='foto' value=''>";
 
-      echo '<label for="foto" >Foto de la propiedad</label>';
-      echo "<input type='file' id='foto' name='foto' value=''>";
+        echo '<label for="estado" >Estado de la propiedad</label>';
+        // echo "<input type='text' id='estado' name='estado' value=''>";
+        
+        try {
+          // Ejecutando sql
+        
+          $matriz = $conexion->query("select * from estado where codigo_estado !='E2' and codigo_estado !='E3' and codigo_estado !='E4' Order by codigo_estado;");
 
-      echo '<label for="estado" >Estado de la propiedad</label>';
-      // echo "<input type='text' id='estado' name='estado' value=''>";
-      
-      try {
-        // Ejecutando sql
-      
-        $matriz = $conexion->query("select * from estado where codigo_estado !='E2' and codigo_estado !='E3' and codigo_estado !='E4' Order by codigo_estado;");
-
-        echo "<select id=estado name=estado>";
-        while ($row = $matriz->fetch()) {
-          echo "<option value=" . $row['codigo_estado'] . ">" . $row['codigo_estado'] . " - " . $row['descripcion'] . "</option>";
+          echo "<select id=estado name=estado>";
+          while ($row = $matriz->fetch()) {
+            echo "<option value=" . $row['codigo_estado'] . ">" . $row['codigo_estado'] . " - " . $row['descripcion'] . "</option>";
+          }
+        } catch (PDOException $e) {
+          //Cada de que ocurra algun error
+          echo "Fallo el select " . $e->getMessage();
         }
-      } catch (PDOException $e) {
-        //Cada de que ocurra algun error
-        echo "Fallo el select " . $e->getMessage();
-      }
 
-      echo "</select>";
+        echo "</select>";
 
 
 
-      echo '<label for="pago" >Metodo de pago</label>';
-      // echo "<input type='text' id='pago' name='pago' value=''>";
-      
-      try {
-        // Ejecutando sql
-      
-        $matriz = $conexion->query("select * from metodo_pago Order by codigo_metodo");
+        echo '<label for="pago" >Metodo de pago</label>';
+        // echo "<input type='text' id='pago' name='pago' value=''>";
+        
+        try {
+          // Ejecutando sql
+        
+          $matriz = $conexion->query("select * from metodo_pago Order by codigo_metodo");
 
-        echo "<select id=pago name=pago>";
-        while ($row = $matriz->fetch()) {
-          echo "<option value=" . $row['codigo_metodo'] . ">" . $row['codigo_metodo'] . " - " . $row['descripcion'] . "</option>";
+          echo "<select id=pago name=pago>";
+          while ($row = $matriz->fetch()) {
+            echo "<option value=" . $row['codigo_metodo'] . ">" . $row['codigo_metodo'] . " - " . $row['descripcion'] . "</option>";
+          }
+        } catch (PDOException $e) {
+          //Casa de que ocurra algun error
+          echo "Fallo el select " . $e->getMessage();
         }
-      } catch (PDOException $e) {
-        //Casa de que ocurra algun error
-        echo "Fallo el select " . $e->getMessage();
-      }
 
-      echo "</select>";
+        echo "</select>";
 
-      echo '<label for="ciudad" >Ciudad</label>';
-      // echo "<input type='text' id='ciudad' name='ciudad' value=''>";
-      try {
-        // Ejecutando sql
-      
-        $matriz = $conexion->query("select * from ciudad Order by codigo_ciudad");
+        echo '<label for="ciudad" >Ciudad</label>';
+        // echo "<input type='text' id='ciudad' name='ciudad' value=''>";
+        try {
+          // Ejecutando sql
+        
+          $matriz = $conexion->query("select * from ciudad Order by codigo_ciudad");
 
-        echo "<select id=ciudad name=ciudad>";
-        while ($row = $matriz->fetch()) {
-          echo "<option value=" . $row['codigo_ciudad'] . ">" . $row['codigo_ciudad'] . " - " . $row['descripcion'] . "</option>";
+          echo "<select id=ciudad name=ciudad>";
+          while ($row = $matriz->fetch()) {
+            echo "<option value=" . $row['codigo_ciudad'] . ">" . $row['codigo_ciudad'] . " - " . $row['descripcion'] . "</option>";
+          }
+        } catch (PDOException $e) {
+          //Casa de que ocurra algun error
+          echo "Fallo el select " . $e->getMessage();
         }
-      } catch (PDOException $e) {
-        //Casa de que ocurra algun error
-        echo "Fallo el select " . $e->getMessage();
-      }
 
-      echo "</select>";
+        echo "</select>";
 
-      echo '<label for="barrio" >Barrio</label>';
-      // echo "<input type='text' id='barrio' name='barrio' value=''>";
-      
-      try {
-        // Ejecutando sql
-      
-        $matriz = $conexion->query("select * from barrio Order by codigo_barrio");
+        echo '<label for="barrio" >Barrio</label>';
+        // echo "<input type='text' id='barrio' name='barrio' value=''>";
+        
+        try {
+          // Ejecutando sql
+        
+          $matriz = $conexion->query("select * from barrio Order by codigo_barrio");
 
-        echo "<select id=barrio name=barrio>";
-        while ($row = $matriz->fetch()) {
-          echo "<option value=" . $row['codigo_barrio'] . ">" . $row['codigo_barrio'] . " - " . $row['descripcion'] . "</option>";
+          echo "<select id=barrio name=barrio>";
+          while ($row = $matriz->fetch()) {
+            echo "<option value=" . $row['codigo_barrio'] . ">" . $row['codigo_barrio'] . " - " . $row['descripcion'] . "</option>";
+          }
+        } catch (PDOException $e) {
+          //Casa de que ocurra algun error
+          echo "Fallo el select " . $e->getMessage();
         }
-      } catch (PDOException $e) {
-        //Casa de que ocurra algun error
-        echo "Fallo el select " . $e->getMessage();
-      }
 
-      echo "</select>";
+        echo "</select>";
 
-      echo '<label for="precio" >Precio</label>';
-      echo "<input type='int' id='precio' name='precio' value=''>";
+        echo '<label for="metro" >Metros de la propiedad</label>';
+        echo "<input type='int' id='metro' name='metro' value=''>";
 
-      echo '<label for="modelo" >Modelo de la propiedad</label>';
-      // echo "<input type='text' id='modelo' name='modelo' value=''>";
+        echo '<label for="habitacion" >Habitaciones de la propiedad</label>';
+        echo "<input type='int' id='habitacion' name='habitacion' value=''>";
+
+       echo "</div>";
       
-      try {
-        // Ejecutando sql
-      
-        $matriz = $conexion->query("select * from modelo Order by codigo_modelo");
 
-        echo "<select id=modelo name=modelo>";
-        while ($row = $matriz->fetch()) {
-          echo "<option value=" . $row['codigo_modelo'] . ">" . $row['codigo_modelo'] . " - " . $row['descripcion'] . "</option>";
+
+      echo "<div class='venta-propiedad__inputs'>
+      ";
+
+        echo '<label for="precio" >Precio</label>';
+        echo "<input type='int' id='precio' name='precio' value=''>";
+
+        echo '<label for="modelo" >Modelo de la propiedad</label>';
+        // echo "<input type='text' id='modelo' name='modelo' value=''>";
+        
+        try {
+          // Ejecutando sql
+        
+          $matriz = $conexion->query("select * from modelo Order by codigo_modelo");
+
+          echo "<select id=modelo name=modelo>";
+          while ($row = $matriz->fetch()) {
+            echo "<option value=" . $row['codigo_modelo'] . ">" . $row['codigo_modelo'] . " - " . $row['descripcion'] . "</option>";
+          }
+        } catch (PDOException $e) {
+          //Casa de que ocurra algun error
+          echo "Fallo el select " . $e->getMessage();
         }
-      } catch (PDOException $e) {
-        //Casa de que ocurra algun error
-        echo "Fallo el select " . $e->getMessage();
-      }
 
-      echo "</select>";
+        echo "</select>";
 
-      echo '<label for="tipo" >Tipo de la propiedad</label>';
-      // echo "<input type='text' id='tipo' name='tipo' value=''>";
-      
-      try {
-        // Ejecutando sql
-      
-        $matriz = $conexion->query("select * from tipo_propiedad Order by codigo_tipo");
+        echo '<label for="tipo" >Tipo de la propiedad</label>';
+        // echo "<input type='text' id='tipo' name='tipo' value=''>";
+        
+        try {
+          // Ejecutando sql
+        
+          $matriz = $conexion->query("select * from tipo_propiedad Order by codigo_tipo");
 
-        echo "<select id=tipo name=tipo>";
-        while ($row = $matriz->fetch()) {
-          echo "<option value=" . $row['codigo_tipo'] . ">" . $row['codigo_tipo'] . " - " . $row['descripcion'] . "</option>";
+          echo "<select id=tipo name=tipo>";
+          while ($row = $matriz->fetch()) {
+            echo "<option value=" . $row['codigo_tipo'] . ">" . $row['codigo_tipo'] . " - " . $row['descripcion'] . "</option>";
+          }
+        } catch (PDOException $e) {
+          //Casa de que ocurra algun error
+          echo "Fallo el select " . $e->getMessage();
         }
-      } catch (PDOException $e) {
-        //Casa de que ocurra algun error
-        echo "Fallo el select " . $e->getMessage();
-      }
 
-      echo "</select>";
+        echo "</select>";
 
-      echo '<label for="edad" >Edad de la propiedad</label>';
-      echo "<input type='int' id='edad' name='edad' value=''>";
+        echo '<label for="edad" >Edad de la propiedad</label>';
+        echo "<input type='int' id='edad' name='edad' value=''>";
 
-      echo '<label for="destinacion" >Destinación de la propiedad</label>';
-      // echo "<input type='text' id='destinacion' name='destinacion' value=''>";
-      try {
-        // Ejecutando sql
-      
-        $matriz = $conexion->query("select * from destinacion Order by codigo_destinacion");
+        echo '<label for="destinacion" >Destinación de la propiedad</label>';
+        // echo "<input type='text' id='destinacion' name='destinacion' value=''>";
+        try {
+          // Ejecutando sql
+        
+          $matriz = $conexion->query("select * from destinacion Order by codigo_destinacion");
 
-        echo "<select id=destinacion name=destinacion>";
-        while ($row = $matriz->fetch()) {
-          echo "<option value=" . $row['codigo_destinacion'] . ">" . $row['codigo_destinacion'] . " - " . $row['descripcion'] . "</option>";
+          echo "<select id=destinacion name=destinacion>";
+          while ($row = $matriz->fetch()) {
+            echo "<option value=" . $row['codigo_destinacion'] . ">" . $row['codigo_destinacion'] . " - " . $row['descripcion'] . "</option>";
+          }
+        } catch (PDOException $e) {
+          //Casa de que ocurra algun error
+          echo "Fallo el select " . $e->getMessage();
         }
-      } catch (PDOException $e) {
-        //Casa de que ocurra algun error
-        echo "Fallo el select " . $e->getMessage();
-      }
 
-      echo "</select>";
+        echo "</select>";
 
+        echo '<label for="bano" >Baños de la propiedad</label>';
+        echo "<input type='int' id='bano' name='bano' value=''>";
 
-      ?>
+        echo '<label for="garaje" >Garajes de la propiedad</label>';
+        echo "<input type='int' id='garaje' name='garaje' value=''>";
 
-      <input type="submit" value="Ingresar mi propiedad">
-
+        ?>
+        <div class="venta-propiedad__boton">
+          <input type="submit" value="Ingresar mi propiedad">
+        </div>
+      </div>
     </form>
 
   </div>

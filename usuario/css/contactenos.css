@@ -2,6 +2,8 @@
     display: flex;
     justify-content: center;
     padding: 20px;
+    background: linear-gradient(135deg, #ffffff, #a3d8cc); /* Degradado para el header */
+    animation: fadeIn 1.5s ease-in-out;
 }
 
 .contactenos-form {
@@ -53,8 +55,13 @@
 }
 
 .contactenos__texto{
-    background: linear-gradient(135deg, #008f8c, #004d40); /* Degradado para el header */
+    background: #008f8c; 
     color: white;
     padding: 20px 0;
     text-align: center;
+    transition: transform 0.4s ease;
+}
+
+.contactenos__texto-h1:hover{
+    transform: scale(1.1);
 }

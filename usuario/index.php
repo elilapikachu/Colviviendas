@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="./css/Modulo_inicio.css">
     <link rel="shortcut icon" href="./img/iconos/hogar.png" type="image/x-icon">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
     <title>Index</title>
 </head>
 <?php
@@ -20,7 +18,8 @@ session_start();
 ?>
 
 <body>
-    <header class="navbar">
+
+<header class="navbar">
         <nav class="navbar__container">
             <div class="navbar__logo">
                 <img src="./img/logo/Logo_colviviendas-recortado.jpg" alt="Logo" class="navbar__logo-img">
@@ -36,33 +35,44 @@ session_start();
                     <a href="./contactenos/contactenos.php" class="navbar__link">Contáctenos</a>
                 </li>
                 <?php
-                if ($_SESSION['tipo_persona'] == '01') {
-                    echo '
+                if (!empty($_SESSION['usuario'])) {
+                    if ($_SESSION['tipo_persona'] == '01' || $_SESSION['tipo_persona'] == '04') {
+                        echo '
                     <li class="navbar__element">
                     <a href="./venta-propiedad/propiedades-vendedor.php" class="navbar__link">Mis propiedades</a></li>';
-                }else{
-                    echo '
-                    <li >
-                        <a href="" class="navbar__link">Blog</a>
-                    </li>';
+                    } else {
+                        echo '
+                        <li class="navbar__element">
+                            <a href="./blog/blog.php" class="navbar__link">Blog</a>
+                        </li>';
+                    }
                 }
                 ?>
-                
-                <li class="navbar__element dropdown">
-                    <a href="#" class="navbar__link">Propiedades</a>
-                    <ul class="dropdown__menu">
-                        <li><a href="carrito.php" class="dropdown__link">Carrito</a></li>
-                        <?php
-                        if ($_SESSION['tipo_persona'] == '01') {
-                            echo '
+                    <?php
+
+                        if (!empty($_SESSION['usuario'])) {
+                            echo'
+                            <li class="navbar__element dropdown">
+                            <a href="#" class="navbar__link">Propiedades</a>
+                            <ul class="dropdown__menu">';
+
+                        
+                            echo '<li><a href="carrito.php" class="dropdown__link">Carrito</a></li>';
+                        
+
+                        
+                            if ($_SESSION['tipo_persona'] == '01' || $_SESSION['tipo_persona'] == '04') {
+                                echo '
                             <li><a href="./venta-propiedad/venta.php" class="dropdown__link">Venta</a></li>';
+                            }
+                            echo'<li><a href="venta-usuario.php" class="dropdown__link">Compra</a></li>
+                                <li><a href="arrendamiento.php" class="dropdown__link">Alquiler</a></li>
+                            </ul>
+                            </li>';
                         }
                         ?>
 
-                        <li><a href="#" class="dropdown__link">Compra</a></li>
-                        <li><a href="#" class="dropdown__link">Alquiler</a></li>
-                    </ul>
-                </li>
+                        
                 <?php
                 if (empty($_SESSION['usuario'])) {
                     echo '
@@ -73,7 +83,7 @@ session_start();
                 } else {
                     echo '
                     <li class="navbar__element navbar__element-ul">
-                        <a href="" class="navbar__link">' . $_SESSION['usuario'] . '</a>
+                        <a href="usuario.php" class="navbar__link">' . $_SESSION['usuario'] . '</a>
                     </li>';
 
                     echo '
@@ -135,10 +145,6 @@ session_start();
 
         </div>
 
-
-
-
-
         <section class="servicios">
             <div class="servicios__descripcion">
                 <h1 class="servicios__descripcion-tittle">¡Nuestros servicios!</h1>
@@ -184,42 +190,22 @@ session_start();
             </div>
         </section>
         <div class="buscar">
-            <br>
+
             <h1 class="buscar__tittle" data-aos="flip-up">
                 Buscar Inmuebles
             </h1>
-            <div class="buscar__form" data-aos="flip-right">
+            <form class="buscar__form" action="venta-usuario.php?cod=buscar" method="POST">
 
-                <div class="buscar__input">
-                    <input type="text" class="buscar__input-text" placeholder="Busca aqui..">
-                </div>
-                <div class="buscar__input">
-                    <input type="text" class="buscar__input-text" placeholder="Busca aqui..">
-                </div>
-                <div class="buscar__input">
-                    <input type="text" class="buscar__input-text" placeholder="Busca aqui..">
-                </div>
-                <div class="buscar__input">
-                    <input type="text" class="buscar__input-text" placeholder="Busca aqui..">
-                </div>
-                <div class="buscar__input">
-                    <input type="text" class="buscar__input-text" placeholder="Busca aqui..">
-                </div>
-                <div class="buscar__input">
-                    <input type="text" class="buscar__input-text" placeholder="Busca aqui..">
-                </div>
-                <div class="buscar__input">
-                    <input type="text" class="buscar__input-text" placeholder="Busca aqui..">
-                </div>
                 <div class="buscar__select">
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select" name="tipo" aria-label="Default select example" >
+                        <option value="">Tipo de propiedad</option>
                         <?php
                         try {
                             // Ejecutando sql
                         
                             $matriz = $conexion->query("select * from tipo_propiedad Order by codigo_tipo;");
                             while ($row = $matriz->fetch()) {
-                                echo "<option value=" . $row['codigo'] . ">" . $row['descripcion'] . "</option>";
+                                echo "<option value=" . $row['codigo_tipo'] . ">" . $row['descripcion'] . "</option>";
                             }
                         } catch (PDOException $e) {
                             //Cada de que ocurra algun error
@@ -228,9 +214,58 @@ session_start();
                         ?>
                     </select>
                 </div>
-            </div>
+                
+                <div class="buscar__select">
+                    <select class="form-select" name="barrio" aria-label="Default select example">
+                        <option value="">Barrio</option>
+                        <?php
+                        try {
+                            // Ejecutando sql
+                        
+                            $matriz = $conexion->query("select * from barrio Order by codigo_barrio;");
+                            while ($row = $matriz->fetch()) {
+                                echo "<option value=" . $row['codigo_barrio'] . ">" . $row['descripcion'] . "</option>";
+                            }
+                        } catch (PDOException $e) {
+                            //Cada de que ocurra algun error
+                            echo "Fallo el select " . $e->getMessage();
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="buscar__select">
+                    <select class="form-select" name="ciudad" aria-label="Default select example">
+                        <option value="">Ciudad</option>
+                        <?php
+                        try {
+                            // Ejecutando sql
+                        
+                            $matriz = $conexion->query("select * from ciudad Order by codigo_ciudad;");
+                            while ($row = $matriz->fetch()) {
+                                echo "<option value=" . $row['codigo_ciudad'] . ">" . $row['descripcion'] . "</option>";
+                            }
+                        } catch (PDOException $e) {
+                            //Cada de que ocurra algun error
+                            echo "Fallo el select " . $e->getMessage();
+                        }
+                        ?>
+                    </select>
+                </div>
+
+                <div class="buscar__input">
+                    <input type="int" class="buscar__input-text" name="habitacion" placeholder="Habitaciones">
+                </div>
+                
+                <div class="buscar__input">
+                    <input type="int" class="buscar__input-text" name="bano" placeholder="Baños">
+                </div>
+                <div class="buscar__input">
+                    <input type="submit" class="buscar__input-text"  value="Buscar">
+                </div>
+            </form>
         </div>
         <div class="favoritos">
+
             <div class="favoritos__tittle">
                 <h1 class="favoritos__tittle-text">
                     Favoritos

@@ -13,7 +13,7 @@ try {
     $vtipo_persona = filter_var($_POST["tipo"]);
     $vcontrasena = filter_var($_POST["contrasena"]);
     $vcorreo = filter_var($_POST["email"]);
-
+    $vfoto = 'http://localhost/Colviviendas/imgs/usuarios/foto-inicial.png';
 
 
     session_start();
@@ -29,8 +29,9 @@ try {
         fecha_registro,
         tipo_persona, 
         contrasena,
-        correo)
-        values (:identificacion, :nombre, :apellido, :fecha, :tipo,:contrasena, :correo );");
+        correo,
+        foto)
+        values (:identificacion, :nombre, :apellido, :fecha, :tipo,:contrasena, :correo, :foto );");
 
     $insertar->bindParam(':identificacion', $videntificacion);
     $insertar->bindParam(':nombre', $vnombre);
@@ -38,6 +39,7 @@ try {
     $insertar->bindParam(':fecha', $vfecha_registro);
     $insertar->bindParam(':tipo', $vtipo_persona);
     $insertar->bindParam(':correo', $vcorreo);
+    $insertar->bindParam(':foto', $vfoto);
     $insertar->bindParam(':contrasena', $vcontrasena);
 
     $insertar->execute();

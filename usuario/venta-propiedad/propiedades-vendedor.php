@@ -13,6 +13,14 @@ include_once "../modulo/conexion.php";
 
 session_start();
 
+if (empty($_SESSION['identificacion'])) {
+    echo '
+      <script>
+      alert("Debe iniciar sesion o registrarse para acceder aqui.");
+      window.location.href="../login.php";
+      </script>';
+  }
+
 ?>
 
 <body>
@@ -45,8 +53,8 @@ session_start();
                         }
                         ?>
 
-                        <li><a href="#" class="dropdown__link">Compra</a></li>
-                        <li><a href="#" class="dropdown__link">Alquiler</a></li>
+                        <li><a href="../venta-usuario.php" class="dropdown__link">Compra</a></li>
+                        <li><a href="../arrendamiento.php" class="dropdown__link">Alquiler</a></li>
                     </ul>
                 </li>
                 <?php
@@ -58,12 +66,12 @@ session_start();
                 } else {
                     echo '
                     <li class="navbar__element navbar__element-ul">
-                        <a href="" class="navbar__link">' . $_SESSION['usuario'] . '</a>
+                        <a href="../usuario.php" class="navbar__link">' . $_SESSION['usuario'] . '</a>
                     </li>';
 
                     echo '
                     <li class="navbar__element navbar__element-ul ">
-                        <a href="cerrar.php" class="navbar__link ">Cerrar</a>
+                        <a href="../cerrar.php" class="navbar__link ">Cerrar</a>
                     </li>';
 
                 }
@@ -71,7 +79,7 @@ session_start();
             </ul>
         </nav>
     </header>
-    <br><br><br><br><br><br><br>
+    <br><br><br><br><br>
 
     <div class="propiedades">
         <div class="propiedades__encabezado">
@@ -209,6 +217,48 @@ session_start();
             </div>
         </div>
     </footer>
+
+    <style>
+    .propiedades__card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .propiedades__card-imagen, .propiedades__card-imagen-img {
+        transition: transform 0.3s ease;
+    }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.propiedades__card');
+
+    cards.forEach(card => {
+        const imageContainer = card.querySelector('.propiedades__card-imagen');
+        const image = card.querySelector('.propiedades__card-imagen-img');
+
+        
+        card.addEventListener('mouseover', function() {
+            card.style.transform = 'scale(1.05)';
+            card.style.boxShadow = '10px 10px 30px rgba(0, 0, 0, 0.3)';
+        });
+
+        card.addEventListener('mouseout', function() {
+            card.style.transform = 'scale(1)';
+            card.style.boxShadow = '5px 5px 20px rgba(0, 0, 0, 0.2)';
+        });
+
+      
+        imageContainer.addEventListener('mouseover', function() {
+            image.style.transform = 'scale(1.15)';
+        });
+
+        imageContainer.addEventListener('mouseout', function() {
+            image.style.transform = 'scale(1)';
+        });
+    });
+});
+</script>
+
 </body>
 
 </html>

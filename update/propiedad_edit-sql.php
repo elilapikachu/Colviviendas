@@ -55,11 +55,15 @@ if ($_SERVER['REQUEST_METHOD'] = 'POST') {
         $vtipo = filter_var($_POST["tipo"]);
         $vedad = filter_var($_POST["edad"]);
         $vdestinacion = filter_var($_POST["destinacion"]);
+        $vmetros = filter_var($_POST["metro"]);
+        $vhabitacion = filter_var($_POST["habitacion"]);
+        $vbano = filter_var($_POST["bano"]);
+        $vgaraje = filter_var($_POST["garaje"]);
         $vfecha = filter_var($_POST["fecha"]);
 
         $update = $conexion->prepare("UPDATE propiedad SET direccion = :direccion, foto = :foto, estado = :estado,
         propietario = :propietario, metodo_pago = :metodo_pago, ciudad = :ciudad, barrio = :barrio, precio = :precio, modelo = :modelo ,fecha_registro = :fecha_registro,
-        tipo_propiedad = :tipo, edad = :edad, destinacion = :destinacion
+        tipo_propiedad = :tipo, edad = :edad, destinacion = :destinacion, nro_metros = :nro_metros, nro_banos = :nro_banos, nro_garajes = :nro_garajes, nro_habitaciones = :nro_habitaciones
         where codigo_propiedad = :primaria ;");
 
         $update->bindParam(':direccion', $vdireccion);
@@ -75,13 +79,18 @@ if ($_SERVER['REQUEST_METHOD'] = 'POST') {
         $update->bindParam(':edad', $vedad);
         $update->bindParam(':estado', $vestado);
         $update->bindParam(':destinacion', $vdestinacion);
+        $update->bindParam(':nro_metros', $vmetros);
+        $update->bindParam(':nro_banos', $vbano);
+        $update->bindParam(':nro_habitaciones', $vhabitacion);
+        $update->bindParam(':nro_garajes', $vgaraje);
         $update->bindParam(':primaria', $vcodigo);
+
 
         $update->execute();
 
         header("location: ../read/pagina_de_propiedad.php");
 
-    }catch (PDOException $e) {
+    } catch (PDOException $e) {
         //Error;
 
         $error = $e->getCode();

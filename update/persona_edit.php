@@ -15,7 +15,7 @@
     <a href="../read/Persona.php">Devolver a Persona</a>
   </div>
 
-  
+
   <form action="persona_edit-sql.php" method="POST" enctype="multipart/form-data">
     <?php
     include_once "../modulo/conexion.php";
@@ -30,7 +30,30 @@
 
     $selected = mysqli_select_db($dbhandle, 'colviviendas') or die("No se encontro el esquema");
 
-    $matriz = mysqli_query($dbhandle, "select a.identificacion, a.nombre, a.apellido, a.direccion, a.telefono, b.codigo_ciudad  as ciudad , b.descripcion, a.fecha_registro, c.codigo_tipo ,c.descripcion as tipo_persona, a.contrasena, a.correo, a.foto from persona a, ciudad b, tipo_persona c where a.ciudad = b.codigo_ciudad AND c.codigo_tipo = a.tipo_persona AND a.identificacion =" . $vcodigo . ";");
+    $matriz = mysqli_query($dbhandle, "SELECT 
+      a.identificacion, 
+      a.nombre,
+      c.codigo_tipo,
+      a.ciudad, 
+      a.apellido, 
+      a.direccion, 
+      a.telefono, 
+      b.descripcion, 
+      a.fecha_registro, 
+      c.descripcion AS tipo_persona, 
+      c.codigo_tipo,
+      b.codigo_ciudad,
+      a.contrasena, 
+      a.correo, 
+      a.foto 
+      FROM 
+        persona a
+      LEFT JOIN 
+        ciudad b ON a.ciudad = b.codigo_ciudad
+      LEFT JOIN 
+        tipo_persona c ON c.codigo_tipo = a.tipo_persona
+      WHERE
+       a.identificacion =" . $vcodigo . ";");
 
     while ($row = mysqli_fetch_array($matriz, MYSQLI_ASSOC)) {
       echo '<label for="identificacion" >Numero de identificación</label>';

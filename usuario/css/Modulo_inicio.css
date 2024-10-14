@@ -6,6 +6,11 @@
 @import "contactenos.css";
 @import "index.css";
 @import "propiedades-vendedor.css";
+@import "venta.css";
+@import "carrito.css";
+@import "blog.css";
+@import "venta-arrendamiento.css";
+@import "usuario.css";
 
 /* variables css */
 
@@ -19,88 +24,98 @@
   --color-blanco: #fffffff5;
   --letra-color: rgb(252, 252, 252);
   --color-gris: #b4b4b4f5;
+  --transicion-base: 0.3s ease;
+  --transition-time: 0.5s ease;
 }
 
-/* inicio estilos */
 
+/* estilos base */
 * {
-  padding: 0px;
-  margin: 0px;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
   font-family: "Roboto Condensed", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: weight;
-  font-style: normal;
 }
 
 /* seccion del navbar */
 .navbar {
   position: fixed;
-  z-index: 2;
+  z-index: 1000;
   width: 100%;
-  height: 9.3rem;
+  height: 6.5rem; 
   background-color: var(--color-2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color var(--transition-time), height var(--transition-time);
+
 }
 
 .navbar__container {
   width: 100%;
-  height: 9.5rem;
+  height: 100%;
   display: flex;
   align-items: center;
-  gap: 10%;
+  justify-content: space-between;
+  padding: 0 2rem;
+  z-index: 1000;
 }
 
 .navbar__logo-img {
-  width: 140px;
-  height: 140px;
-  border-radius: 100%;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  transition: transform var(--transition-time);
+}
+
+.navbar__logo-img:hover {
+  transform: scale(1.2); /* Animación en hover */
 }
 
 .navbar__menu {
   display: flex;
-  flex-direction: row;
-  gap: 30%;
+  gap: 1.5rem;
   list-style: none;
 }
 
 .navbar__element {
-  position: relative; /* Para que el dropdown se posicione relativo a su contenedor */
-  width: 50px;
+  position: relative;
   display: flex;
   align-items: center;
 }
 
 .navbar__link {
-  font-size: 20px;
+  font-size: 16px;
   text-decoration: none;
-  color: var(--color-1);
+  color: var(--color-blanco);
+  transition: color var(--transition-time), transform var(--transition-time);
 }
 
 .navbar__link:hover {
   color: var(--color-4);
+  transform: scale(1.1); /* Animación en hover */
 }
 
 /* Estilo para el dropdown */
 .dropdown__menu {
-  display: none; /* Oculto por defecto */
+  display: none;
   position: absolute;
   top: 100%;
   left: 0;
   background-color: var(--color-2);
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 100;
   list-style: none;
-  padding: 0;
-  margin: 0;
-  width: max-content;
+  padding: 0.5rem 0;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity var(--transition-time), transform var(--transition-time);
 }
 
 .dropdown__link {
-  font-size: 18px;
-  padding: 10px 20px;
+  font-size: 14px;
+  padding: 0.75rem 1.5rem;
   text-decoration: none;
   color: var(--color-1);
   display: block;
-  white-space: nowrap; /* Para evitar que los textos largos se corten */
 }
 
 .dropdown__link:hover {
@@ -111,7 +126,10 @@
 /* Mostrar el dropdown cuando se pasa el mouse por encima */
 .navbar__element:hover .dropdown__menu {
   display: block;
+  opacity: 1;
+  transform: translateY(0);
 }
+
 
 /* sección footer */
 .footer {

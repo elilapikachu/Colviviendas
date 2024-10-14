@@ -4,6 +4,14 @@ error_reporting(0);
 //Setting session start
 session_start();
 
+if (empty($_SESSION['identificacion'])) {
+  echo '
+    <script>
+    alert("Debe iniciar sesion o registrarse para acceder aqui.");
+    window.location.href="login.php";
+    </script>';
+}
+
 $total = 0;
 $subtotal = 0;
 
@@ -39,7 +47,6 @@ if ($action == 'addcart' && $_SERVER['REQUEST_METHOD'] == 'POST') {
 //Empty All
 if ($action == 'emptyall') {
   $_SESSION['products'] = array();
-  session_unset();
   header("Location:carrito.php");
 }
 
@@ -71,34 +78,105 @@ $products = $stmt->fetchAll();
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="./css/Modulo_inicio.css">
+  <link rel="shortcut icon" href="./img/iconos/carrito-de-compras.png" type="image/x-icon">
   <title>Articulos</title>
 
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
 <body>
 
-  <h1> Venta de Artículos </h1>
+  <header class="navbar">
+    <nav class="navbar__container">
+      <div class="navbar__logo">
+        <img src="./img/logo/Logo_colviviendas-recortado.jpg" alt="Logo" class="navbar__logo-img">
+      </div>
+      <ul class="navbar__menu">
+        <li class="navbar__element">
+          <a href="index.php" class="navbar__link">Inicio</a>
+        </li>
+        <li class="navbar__element">
+          <a href="quienes_somos.php" class="navbar__link">Nosotros</a>
+        </li>
+        <li class="navbar__element">
+          <a href="./contactenos/contactenos.php" class="navbar__link">Contáctenos</a>
+        </li>
+        <?php
 
-  <div class="boton">
-    <a href="index.php" class="boton__btn">Volver al index</a>
-  </div>
+        if (!empty($_SESSION['usuario'])) {
+          if ($_SESSION['tipo_persona'] == '01' || $_SESSION['tipo_persona'] == '04') {
+            echo '
+            <li class="navbar__element">
+            <a href="./venta-propiedad/propiedades-vendedor.php" class="navbar__link">Mis propiedades</a></li>';
+          } else {
+            echo '
+            <li class="navbar__element">
+              <a href="./blog/blog.php" class="navbar__link">Blog</a>
+            </li>';
+          }
+        }
+        ?>
 
-  <div class="container" style="width:1000px;">
+        <li class="navbar__element dropdown">
+          <a href="#" class="navbar__link">Propiedades</a>
+          <ul class="dropdown__menu">
+
+            <?php
+
+            if (!empty($_SESSION['usuario'])) {
+              echo '<li><a href="carrito.php" class="dropdown__link">Carrito</a></li>';
+            }
+
+            if (!empty($_SESSION['usuario'])) {
+              if ($_SESSION['tipo_persona'] == '01' || $_SESSION['tipo_persona'] == '04') {
+                echo '
+                  <li><a href="./venta-propiedad/venta.php" class="dropdown__link">Venta</a></li>';
+              }
+            }
+            ?>
+
+            <li><a href="venta-usuario.php" class="dropdown__link">Compra</a></li>
+            <li><a href="arrendamiento.php" class="dropdown__link">Alquiler</a></li>
+          </ul>
+        </li>
+        <?php
+        if (empty($_SESSION['usuario'])) {
+          echo '
+          <li class="navbar__element navbar__element-ul ">
+            <a href="login.php" class="navbar__link ">Login</a>
+          </li>';
+        } else {
+          echo '
+          <li class="navbar__element navbar__element-ul">
+            <a href="usuario.php" class="navbar__link">' . $_SESSION['usuario'] . '</a>
+          </li>';
+
+          echo '
+          <li class="navbar__element navbar__element-ul ">
+            <a href="cerrar.php" class="navbar__link ">Cerrar</a>
+          </li>';
+        }
+        ?>
+      </ul>
+    </nav>
+  </header>
+
+  <br><br><br><br><br>
+
+  <h1 class="tittle__carrito"> Venta de Artículos </h1>
+
+
+  <div class="container">
     <?php if (!empty($_SESSION['products'])): ?>
-      <nav class="navbar navbar-inverse" style="background:#04B745;">
-        <div class="container-fluid pull-left" style="width:300px;">
-          <div class="navbar-header"> <a class="navbar-brand" href="#" style="color:#FFFFFF;">Carrito de Compras</a>
+      <nav class="navbar-inverse">
+        <div class="container-fluid pull-left">
+          <div class="navbar-header"> <a class="navbar-brand" href="#">Carrito de Compras</a>
           </div>
         </div>
-        <div class="pull-right" style="margin-top:7px;margin-right:7px;"><a href="carrito.php?action=emptyall"
-            class="btn btn-info">Vaciar carrito</a></div>
-        <div class="pull-right" style="margin-top:7px;margin-right:7px;"><a href="carrito-pagar.php"
-            class="btn btn-info">Ir a pagar</a></div>
+        <div class="pull-right"><a href="carrito.php?action=emptyall" class="btn btn-info">Vaciar carrito</a></div>
+        <div class="pull-right"><a href="carrito-pagar.php" class="btn btn-info">Ir a pagar</a></div>
 
       </nav>
-      <table class="table table-striped">
+      <table class="table">
         <thead>
           <tr>
             <th>Propiedad en carrito</th>
@@ -107,6 +185,7 @@ $products = $stmt->fetchAll();
             <th>Modelo</th>
             <th>Destinacion</th>
             <th>Precio</th>
+            <th></th>
             <!-- <th>Cantidad</th> -->
           </tr>
         </thead>
@@ -114,7 +193,7 @@ $products = $stmt->fetchAll();
           <? $subtotal = 0; ?>
           <tr>
             <td><?php print $product['codigo_propiedad'] ?></td>
-            <td><img src="<?php print $product['foto'] ?>" width="200"></td>
+            <td><img src="<?php print $product['foto'] ?>"></td>
             <td><?php print $product['direccion'] ?></td>
             <td><?php print $product['modelo'] ?></td>
             <td><?php print $product['destinacion'] ?></td>
@@ -129,22 +208,22 @@ $products = $stmt->fetchAll();
           <?php $total = $total + $product['precio']; ?>
         <?php endforeach; ?>
         <tr>
-          <td colspan="5" align="right">
+          <td>
             <h4>Total:$<?php print number_format($total, 0, ',', '.') ?></h4>
           </td>
         </tr>
       </table>
     <?php endif; ?>
-    <nav class="navbar navbar-inverse" style="background:#04B745;">
+    <nav class="navbar-inverse">
       <div class="container-fluid">
-        <div class="navbar-header"> <a class="navbar-brand" href="#" style="color:#FFFFFF;">Productos</a> </div>
+        <div class="navbar-header"> <a class="navbar-brand" href="#">Productos</a> </div>
       </div>
 
       <!--Trae todos los productos de la tabla -->
     </nav>
     <div class="row">
-      <div class="container" style="width:1000px;">
-        <table class="table table-striped">
+      <div class="container">
+        <table class="table">
           <thead>
             <tr>
               <th>Propiedad</th>
@@ -153,12 +232,13 @@ $products = $stmt->fetchAll();
               <th>Modelo</th>
               <th>Destinacion</th>
               <th>Precio</th>
+              <th></th>
             </tr>
           </thead>
           <?php foreach ($products as $product): ?>
             <tr>
               <td><?php print $product['codigo_propiedad'] ?></td>
-              <td><img src="<?php print $product['foto'] ?>" width="200"></td>
+              <td><img src="<?php print $product['foto'] ?>"></td>
               <td><?php print $product['direccion'] ?></td>
               <td><?php print $product['modelo'] ?></td>
               <td><?php print $product['destinacion'] ?></td>
@@ -178,7 +258,7 @@ $products = $stmt->fetchAll();
       </div>
     </div>
   </div>
-
+  
 </body>
 
 </html>

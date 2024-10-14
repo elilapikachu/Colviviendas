@@ -15,7 +15,8 @@
     <form action="venta-propiedad_sql.php" method="POST">
       <?php 
 
-$vcodigo = filter_var($_GET['codigo']);
+    $vcodigo = filter_var($_GET['codigo']);
+    $vcodigo2 = filter_var($_GET['codigo2']);
 
 $mysql_host = 'localhost';
     $mysql_user = 'root';
@@ -25,7 +26,7 @@ $mysql_host = 'localhost';
 
     $selected = mysqli_select_db ($dbhandle, 'colviviendas') or die("No se encontro el esquema");
 
-    $matriz = mysqli_query($dbhandle, "select a.nro_venta, a.codigo_propiedad, b.direccion, a.fecha_entrega, b.precio, a.precio_final FROM venta_propiedad a, propiedad b WHERE a.codigo_propiedad = b.codigo_propiedad and a.nro_venta ='".$vcodigo."';");
+    $matriz = mysqli_query($dbhandle, "select a.nro_venta, a.codigo_propiedad, b.direccion, a.fecha_entrega, b.precio, a.precio_final FROM venta_propiedad a, propiedad b WHERE a.codigo_propiedad = b.codigo_propiedad and a.nro_venta ='".$vcodigo."' and a.codigo_propiedad ='".$vcodigo2."' ;");
 
 
     while ($row = mysqli_fetch_array($matriz, MYSQLI_ASSOC)) {  
@@ -36,7 +37,7 @@ $mysql_host = 'localhost';
         echo "<input type='text' id='propiedad' name='propiedad' value='".$row['codigo_propiedad']."' readonly>";
 
         echo '<label for="fecha">Fecha de entrega</label>';
-        echo "<input type='text' id='fecha' name='fecha' value='".$row['fecha_entrega']."' readonly>";
+        echo "<input type='date' id='fecha' name='fecha' value='".$row['fecha_entrega']."'>";
 
         echo '<label for="precio">Precio final de la venta</label>';
         echo "<input type='int' id='precio' name='precio' value='".$row['precio_final']."'>";

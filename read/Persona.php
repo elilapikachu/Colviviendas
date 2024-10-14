@@ -57,14 +57,70 @@
 
   if (empty($_GET['buscar'])) {
     //si es vacia la opcion trae todo.
-    $matriz = mysqli_query($dbhandle, "select a.identificacion, a.nombre, a.apellido, a.direccion, a.telefono, b.descripcion, a.fecha_registro, c.descripcion as tipo_persona, a.contrasena, a.correo, a.foto from persona a, ciudad b, tipo_persona c where a.ciudad = b.codigo_ciudad AND c.codigo_tipo = a.tipo_persona;");
+    $matriz = mysqli_query($dbhandle, "SELECT 
+    a.identificacion, 
+    a.nombre, 
+    a.apellido, 
+    a.direccion, 
+    a.telefono, 
+    b.descripcion, 
+    a.fecha_registro, 
+    c.descripcion AS tipo_persona, 
+    a.contrasena, 
+    a.correo, 
+    a.foto 
+FROM 
+    persona a
+LEFT JOIN 
+    ciudad b ON a.ciudad = b.codigo_ciudad
+LEFT JOIN 
+    tipo_persona c ON c.codigo_tipo = a.tipo_persona");
 
   } else {
 
-    $matriz = mysqli_query($dbhandle, "select a.identificacion, a.nombre, a.apellido, a.direccion, a.telefono, b.descripcion, a.fecha_registro, c.descripcion as tipo_persona, a.contrasena, a.correo, a.foto from persona a, ciudad b, tipo_persona c where a.ciudad = b.codigo_ciudad AND c.codigo_tipo = a.tipo_persona and a.nombre like '%" . $_GET['buscar'] . "%';");
+    $matriz = mysqli_query($dbhandle, "SELECT 
+    a.identificacion, 
+    a.nombre, 
+    a.apellido, 
+    a.direccion, 
+    a.telefono, 
+    b.descripcion, 
+    a.fecha_registro, 
+    c.descripcion AS tipo_persona, 
+    a.contrasena, 
+    a.correo, 
+    a.foto 
+    FROM 
+        persona a
+    LEFT JOIN 
+        ciudad b ON a.ciudad = b.codigo_ciudad
+    LEFT JOIN 
+        tipo_persona c ON c.codigo_tipo = a.tipo_persona
+    WHERE
+    a.nombre like '%" . $_GET['buscar'] . "%'");
     $vregistros = mysqli_num_rows($matriz);
     if ($vregistros == 0) {
-      $matriz = mysqli_query($dbhandle, "select a.identificacion, a.nombre, a.apellido, a.direccion, a.telefono, b.descripcion, a.fecha_registro, c.descripcion as tipo_persona, a.contrasena, a.correo, a.foto from persona a, ciudad b, tipo_persona c where a.ciudad = b.codigo_ciudad AND c.codigo_tipo = a.tipo_persona and a.apellido like '%" . $_GET['buscar'] . "%';");
+      $matriz = mysqli_query($dbhandle, "SELECT 
+      a.identificacion, 
+      a.nombre, 
+      a.apellido, 
+      a.direccion, 
+      a.telefono, 
+      b.descripcion, 
+      a.fecha_registro, 
+      c.descripcion AS tipo_persona, 
+      a.contrasena, 
+      a.correo, 
+      a.foto 
+      FROM 
+        persona a
+      LEFT JOIN 
+        ciudad b ON a.ciudad = b.codigo_ciudad
+      LEFT JOIN 
+        tipo_persona c ON c.codigo_tipo = a.tipo_persona
+      WHERE
+      a.apellido like '%" . $_GET['buscar'] . "%'");
+
       $vregistros = mysqli_num_rows($matriz);
 
     }
@@ -72,6 +128,7 @@
       echo "no se encontraron registros";
     }
   }
+
 
 
   //primera fila

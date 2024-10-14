@@ -84,11 +84,11 @@
 
   if (empty($_GET['buscar'])) {
     //si es vacia la opcion trae todo.
-    $matriz = mysqli_query($dbhandle, "SELECT a.codigo_propiedad, a.direccion, a.foto, b.descripcion as estado, c.nombre, c.apellido, d.descripcion, e.descripcion as ciudad, f.descripcion as barrio, a.precio, g.descripcion as modelo, a.fecha_registro, h.descripcion as tipo_propiedad, a.edad, i.descripcion as destinacion FROM propiedad a, estado b, persona c, metodo_pago d, ciudad e, barrio f, modelo g, tipo_propiedad h, destinacion i where a.estado = b.codigo_estado and a.propietario = c.identificacion and a.metodo_pago = d.codigo_metodo and a.ciudad = e.codigo_ciudad and a.barrio = f.codigo_barrio and a.modelo = g.codigo_modelo and a.tipo_propiedad = h.codigo_tipo and a.destinacion = i.codigo_destinacion;");
+    $matriz = mysqli_query($dbhandle, "SELECT a.codigo_propiedad, a.direccion, a.foto, b.descripcion as estado, c.nombre, c.apellido, d.descripcion, e.descripcion as ciudad, f.descripcion as barrio, a.precio, a.nro_habitaciones, a.nro_banos, a.nro_metros, a.nro_garajes, g.descripcion as modelo, a.fecha_registro, h.descripcion as tipo_propiedad, a.edad, i.descripcion as destinacion FROM propiedad a, estado b, persona c, metodo_pago d, ciudad e, barrio f, modelo g, tipo_propiedad h, destinacion i where a.estado = b.codigo_estado and a.propietario = c.identificacion and a.metodo_pago = d.codigo_metodo and a.ciudad = e.codigo_ciudad and a.barrio = f.codigo_barrio and a.modelo = g.codigo_modelo and a.tipo_propiedad = h.codigo_tipo and a.destinacion = i.codigo_destinacion;");
 
   } else {
 
-    $matriz = mysqli_query($dbhandle, "SELECT a.codigo_propiedad, a.direccion, a.foto, b.descripcion as estado, c.nombre, c.apellido, d.descripcion, e.descripcion as ciudad, f.descripcion as barrio, a.precio, g.descripcion as modelo, a.fecha_registro, h.descripcion as tipo_propiedad, a.edad, i.descripcion as destinacion FROM propiedad a, estado b, persona c, metodo_pago d, ciudad e, barrio f, modelo g, tipo_propiedad h, destinacion i where a.estado = b.codigo_estado and a.propietario = c.identificacion and a.metodo_pago = d.codigo_metodo and a.ciudad = e.codigo_ciudad and a.barrio = f.codigo_barrio and a.modelo = g.codigo_modelo and a.tipo_propiedad = h.codigo_tipo and a.destinacion = i.codigo_destinacion and a.direccion like '%" . $_GET['buscar'] . "%';");
+    $matriz = mysqli_query($dbhandle, "SELECT a.codigo_propiedad, a.direccion, a.foto, b.descripcion as estado, c.nombre, c.apellido, d.descripcion, e.descripcion as ciudad, f.descripcion as barrio, a.precio, g.descripcion as modelo, a.fecha_registro, h.descripcion as tipo_propiedad, a.edad,a.nro_metros,a.nro_banos,a.nro_garajes, a.nro_habitaciones, i.descripcion as destinacion FROM propiedad a, estado b, persona c, metodo_pago d, ciudad e, barrio f, modelo g, tipo_propiedad h, destinacion i where a.estado = b.codigo_estado and a.propietario = c.identificacion and a.metodo_pago = d.codigo_metodo and a.ciudad = e.codigo_ciudad and a.barrio = f.codigo_barrio and a.modelo = g.codigo_modelo and a.tipo_propiedad = h.codigo_tipo and a.destinacion = i.codigo_destinacion and a.direccion like '%" . $_GET['buscar'] . "%';");
     $vregistros = mysqli_num_rows($matriz);
     if ($vregistros == 0) {
       echo "no se encontraron registros";
@@ -115,6 +115,10 @@
         <th>Tipo</th>
         <th>Edad</th>
         <th>Destinación</th>
+        <th>Metros</th>
+        <th>Baños</th>
+         <th>Habitaciones</th>
+        <th>Garajes</th>
      </tr>";
 
   //Segunda Fila en adelante
@@ -139,6 +143,10 @@
     echo "<td>" . $row['tipo_propiedad'] . "</td>";
     echo "<td>" . $row['edad'] . "</td>";
     echo "<td>" . $row['destinacion'] . "</td>";
+    echo "<td>" . $row['nro_metros'] . " m2</td>";
+    echo "<td>" . $row['nro_banos'] . "</td>";
+    echo "<td>" . $row['nro_habitaciones'] . "</td>";
+    echo "<td>" . $row['nro_garajes'] . "</td>";
     echo "</tr>";
     echo "<td><a href='../update/propiedad_edit.php?codigo=" . $row['codigo_propiedad'] . "'>Editar</a></td>";
     echo "<td><a href='javascript:preguntar(\"" . $row['codigo_propiedad'] . "\")'>Eliminar</a></td>";

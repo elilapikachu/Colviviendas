@@ -1,0 +1,264 @@
+/* Blog - Sección Inicio */
+.blog {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.blog__principal {
+  width: 100%;
+  height: 300px;
+  background: url("../img/blog/bienvenida.png") no-repeat center center/cover;
+  position: relative;
+}
+
+.blog__principal_textos {
+  width: 100%;
+  height: 300px;
+  background-color: rgba(0, 96, 144, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.blog__principal-tittle {
+  font-size: 70px;
+  color: var(--color-blanco);
+  text-align: center;
+  transition: transform 0.3s ease; /* Añadimos transición */
+}
+
+.blog__principal-tittle:hover {
+  transform: scale(1.1); /* Se agranda ligeramente al hacer hover */
+}
+
+.blog__principal-texto {
+  font-size: 20px;
+  text-align: center;
+  color: var(--color-blanco);
+  transition: transform 0.3s ease; /* Añadimos transición */
+}
+
+.blog__principal-texto:hover {
+  transform: scale(1.05); /* Se agranda ligeramente al hacer hover */
+}
+
+/* Consejos - Sección Consejos */
+.blog__consejos {
+  width: 100%;
+  padding: 50px 0;
+  background: linear-gradient(var(--color-5), var(--color-gris));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.blog__consejos_principal {
+  width: 100%;
+  text-align: center;
+}
+
+.blog__consejos_principal-tittle {
+  font-size: 50px;
+  color: var(--color-1);
+  margin-bottom: 10px;
+  transition: transform 0.3s ease; /* Añadimos transición */
+}
+
+.blog__consejos_principal-tittle:hover {
+  transform: scale(1.1); /* Se agranda ligeramente al hacer hover */
+}
+
+.blog__consejos_principal-texto {
+  font-size: 20px;
+  color: var(--color-2);
+  transition: transform 0.3s ease;
+}
+
+.blog__consejos_principal-texto:hover {
+  transform: scale(1.05);
+}
+
+.blog__consejos-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+  width: 100%;
+}
+
+.blog__consejos-card {
+  width: 45%;
+  padding: 20px;
+  background-color: var(--color-blanco);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog__consejos-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.blog__consejos-card-tittle {
+  font-size: 28px;
+  color: var(--color-1);
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+
+.blog__consejos-card-tittle:hover {
+  transform: scale(1.07);
+}
+
+.blog__consejos-card-text {
+  font-size: 18px;
+  color: var(--color-1);
+  line-height: 1.6;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.blog__consejos-card-text:hover {
+  transform: scale(1.05);
+}
+
+/* Comentarios - Sección Comentarios */
+.blog__comentarios {
+  width: 100%;
+  background: linear-gradient(var(--color-gris), var(--color-blanco));
+  padding: 50px 0;
+}
+
+.blog__comentarios-form {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: var(--color-2);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.blog__comentarios-input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.blog__comentarios-input-label {
+  font-size: 18px;
+  color: var(--color-1);
+}
+
+.blog__comentarios-input-text {
+  height: 90px;
+  padding: 10px;
+  font-size: 16px;
+  color: var(--color-1);
+  background-color: var(--color-blanco);
+  border: 1px solid var(--color-gris);
+  border-radius: 5px;
+  resize: none;
+  transition: border-color 0.3s ease;
+}
+
+.blog__comentarios-input-text:focus {
+  border-color: var(--color-1);
+  outline: none;
+}
+
+.blog__comentarios-input-boton {
+  padding: 10px;
+  font-size: 16px;
+  color: rgb(0, 183, 255);
+  background-color: var(--color-1);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.blog__comentarios-input-boton:hover {
+  background-color: var(--color-5);
+}
+
+/* Comentarios Container */
+.blog__comentarios-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 50px;
+}
+
+.blog__comentarios-comentario {
+  width: 75%;
+  padding: 20px;
+  background-color: var(--color-blanco);
+  border: 1px solid var(--color-gris);
+  border-radius: 10px;
+  display: flex;
+  gap: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog__comentarios-comentario:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.blog__comentarios-comentario-foto {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.blog__comentarios-comentario-foto:hover {
+  transform: scale(1.1);
+}
+
+.blog__comentarios-comentario-foto-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.blog__comentarios-comentario-textos {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.blog__comentarios-comentario-textos h4 {
+  font-size: 20px;
+  color: var(--color-1);
+  transition: transform 0.3s ease;
+}
+
+.blog__comentarios-comentario-textos h4:hover {
+  transform: scale(1.1);
+}
+
+.blog__comentarios-comentario-textos-text {
+  font-size: 16px;
+  color: var(--color-gris);
+  word-wrap: break-word;
+  transition: transform 0.3s ease;
+}
+
+.blog__comentarios-comentario-textos-text:hover {
+  transform: scale(1.05);
+}

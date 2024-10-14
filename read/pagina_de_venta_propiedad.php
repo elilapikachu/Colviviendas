@@ -10,12 +10,12 @@
 
 <body>
   <script>
-    function preguntar(codigo) {
+    function preguntar(codigo, codigo2) {
 
       eliminar = confirm("¿Deseas eliminar este registro?");
 
       if (eliminar)
-        window.location.href = "../delete/eliminar_venta_propiedad.php?codigo=" + codigo;
+        window.location.href = "../delete/eliminar_venta_propiedad.php?codigo=" + codigo +"&codigo2=" + codigo2;
     }
   </script>
   <div class="letrero">
@@ -110,8 +110,8 @@
     echo "<td>" . $row['precio_final'] . "</td>";
 
     echo "</tr>";
-    echo "<td><a href='../update/venta-propiedad.php?codigo=" . $row['nro_venta'] . "'>Editar</a></td>";
-    echo "<td><a href='javascript:preguntar(\"" . $row['nro_venta'] . "\")'>Eliminar</a></td>";
+    echo "<td><a href='../update/venta-propiedad.php?codigo=" . $row['nro_venta'] . "&codigo2=".$row['codigo_propiedad']."'>Editar</a></td>";
+    echo "<td><a href='javascript:preguntar(\"" . $row['nro_venta'] . "\", \"" . $row['codigo_propiedad'] . "\")'>Eliminar</a></td>";
   }
 
 

@@ -182,6 +182,19 @@
     }
 
     echo "</select>";
+ 
+    echo '<label for="metro" >Metros de la propiedad</label>';
+    echo "<input type='int' id='metro' name='metro' value=''>";
+
+    echo '<label for="habitacion" >Habitaciones de la propiedad</label>';
+    echo "<input type='int' id='habitacion' name='habitacion' value=''>";
+
+   
+    echo '<label for="bano" >Baños de la propiedad</label>';
+    echo "<input type='int' id='bano' name='bano' value=''>";
+
+    echo '<label for="garaje" >Garajes de la propiedad</label>';
+    echo "<input type='int' id='garaje' name='garaje' value=''>";
 
     echo '<label for="fecha" >fecha de registro de la propiedad</label>';
     echo "<input type='datetime-local' id='fecha' name='fecha' value=''>";

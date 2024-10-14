@@ -2,11 +2,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: 110vh;
     width: 100%;
     background: url('../img/eiffel-tower-8846952_1280.png')no-repeat;
     background-position: center;
     background-size: cover;
+    animation: fadeIn 1.5s ease-in-out;
 }
 
 .register__box {
@@ -20,7 +21,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    /* transition: transform 0.5s ease; */
 }
+
+/* .register__box:hover {
+    cursor: default;
+    transform: scale(1.03);
+} */
 
 .register__text {
     display: flex;
@@ -33,12 +40,23 @@
     font-size: var(--tittle_font-size);
     color: #fffffff5;
     text-align: center;
+    transition: transform 0.3s ease;
 }
 
+.tittle__registro:hover{
+    cursor: default;
+    transform: scale(1.1);
+}
 .texto {
     font-size: 0.938rem;
     color: var(--color-text_registro);
     text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.texto:hover{
+    cursor: default;
+    transform: scale(1.07);
 }
 
 .register__input {
@@ -102,15 +120,25 @@
     font-size: 0.938rem;
     color: var(--color-text_registro);
     text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.register_texto:hover{
+    cursor: default;
+    transform: scale(1.06);
 }
 
 .register__link {
     text-decoration: none;
     color: var(--color-text_registro);
+    transition: transform 0.3s ease;
 }
 
 .register__link:hover {
     color: #abababf5;
+    cursor: pointer;
+    transform: scale(1.1);
+
 }
 
 .register__button {
@@ -124,11 +152,14 @@
     /* margin-top: var(--margin-top); */
     margin-top: 1.063rem;
     font-size: 1rem;
+    transition: transform 0.4s ease;
 }
 .register__button:hover {
     color: #ffffff;
     background: #060606;
     box-shadow: 0 0 10px #ffffff, 0 0 40px #ffffff, 0 0 80px #ffffff;
+    cursor: default;
+    transform: scale(1.1);
 }
 .register__select{
     margin-left: 150px;

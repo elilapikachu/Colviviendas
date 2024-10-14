@@ -20,18 +20,17 @@
                     </div>
                     <div class="login__input">
                         <ion-icon class="login__icon" name="finger-print"></ion-icon>
-
                         <input type="text" name="identificacion" class="login__input-text" id="identificacion"
                             placeholder="Ingresa tu Identificación" required />
                     </div>
                     <div class="login__input">
-                        <ion-icon class="login__icon" name="lock-closed-outline"></ion-icon>
+                        <ion-icon id="togglePassword" class="login__icon" name="lock-closed-outline"></ion-icon>
                         <input type="password" name="contrasena" class="login__input-text" id="contrasena"
                             placeholder="Ingresa tu contraseña" required />
                     </div>
                     <div class="login__text">
                         <p class="login__texto">
-                            ¿no tienes cuenta? <a href="registro.php" class="login__link">¡Registrate!</a>
+                            ¿No tienes cuenta? <a href="registro.php" class="login__link">¡Regístrate!</a>
                         </p>
                     </div>
                     <button class="login__button" type="submit">Iniciar sesión</button>
@@ -39,16 +38,13 @@
             </div>
         </div>
     </div>
-    <?php
 
+    <?php
     if (empty($_GET['identificacion'])) {
         $vusuario = '';
     } else {
         $vusuario = $_GET['identificacion'];
     }
-
-
-
 
     if (empty($_GET['contrasena'])) {
         $vclave = '';
@@ -56,31 +52,20 @@
         $vclave = $_GET['contrasena'];
     }
 
-
-
-
     if (!empty($_GET['contrasena']) && !empty($_GET['identificacion'])) {
-
-
-        // Este script es para conectarme a la BD
-    
+        // Conexión a la base de datos
         $mysql_host = 'localhost';
         $mysql_user = 'root';
         $password = '';
 
         $dbhandle = mysqli_connect($mysql_host, $mysql_user, $password) or die('Problemas de conexión con DB');
+        $selected = mysqli_select_db($dbhandle, 'colviviendas') or die("No se encontró el esquema");
 
-        $selected = mysqli_select_db($dbhandle, 'colviviendas') or die("No se encontro el esquema");
-
-
-        //esta instruccion es para seleccionar todos los registros de la tabla y llevarlos
-        //a una matriz en la variable "result"
-        $result = mysqli_query($dbhandle, "SELECT identificacion, nombre, apellido, contrasena, tipo_persona from persona where identificacion = '" . $vusuario . "' and contrasena = '" . $vclave . "';");
+        // Consulta para verificar las credenciales
+        $result = mysqli_query($dbhandle, "SELECT identificacion, nombre, apellido, contrasena, tipo_persona FROM persona WHERE identificacion = '" . $vusuario . "' AND contrasena = '" . $vclave . "';");
 
         $vregistros = mysqli_num_rows($result);
         $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-
-
 
         if ($vregistros > 0) {
             session_start();
@@ -100,16 +85,17 @@
         } else {
             echo "<script>alert('Identificación o Contraseña incorrectos.')</script>";
         }
-
-
-
     }
-
     ?>
+
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-</body>
+    <!-- Agregar el script para mostrar y ocultar la contraseña -->
 
-</html>
+    <script src="./js/candado.js"></script>
+
+</body >
+
+</html >
