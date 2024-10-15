@@ -35,7 +35,10 @@
   align-items: center;
   gap: 10px;
 }
-
+.container-vender{
+  display: flex;
+  flex-wrap: wrap;
+}
 .vender__principal-tittle,
 .alquiler__principal-tittle{
   font-size: 70px;

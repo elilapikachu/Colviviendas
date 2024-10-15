@@ -276,9 +276,7 @@ session_start();
                     <div class="favoritos__card-textos">
                         <h3 class="favoritos__card-tittle">Propiedad popular</h3>
                         <p class="favoritos_card-parrafo">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur exercitationem eos
-                            quibusdam, tempore animi perspiciatis optio adipisci rerum maiores ullam, consequuntur
-                            consectetur. Tenetur eligendi unde praesentium inventore ducimus id veniam!
+                        Extensa propiedad frente al mar, con acceso directo a la arena. Perfecta para construir una casa de vacaciones o realizar actividades recreativas. El entorno natural ofrece tranquilidad y vistas espectaculares al océano.
                         </p>
                         <img src="./img/casa 3.jpg" alt="casa" class="favoritos__card-img">
                     </div>
@@ -287,9 +285,7 @@ session_start();
                     <div class="favoritos__card-textos">
                         <h3 class="favoritos__card-tittle">Propiedad popular</h3>
                         <p class="favoritos_card-parrafo">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur exercitationem eos
-                            quibusdam, tempore animi perspiciatis optio adipisci rerum maiores ullam, consequuntur
-                            consectetur. Tenetur eligendi unde praesentium inventore ducimus id veniam!
+                        Propiedad de grandes dimensiones diseñada para la cría de ganado. Cuenta con abundantes pastos y una fuente natural de agua. El terreno está dividido en áreas de pastoreo y cercado para facilitar la gestión del ganado.
                         </p>
                         <img src="./img/casa 4.jpg" alt="casa" class="favoritos__card-img">
                     </div>
@@ -298,9 +294,7 @@ session_start();
                     <div class="favoritos__card-textos">
                         <h3 class="favoritos__card-tittle">Propiedad popular</h3>
                         <p class="favoritos_card-parrafo">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur exercitationem eos
-                            quibusdam, tempore animi perspiciatis optio adipisci rerum maiores ullam, consequuntur
-                            consectetur. Tenetur eligendi unde praesentium inventore ducimus id veniam!
+                        Hermoso lago en una propiedad privada, ideal para la pesca o deportes acuáticos. Rodeado de paisajes pintorescos y zonas de acampada. Un lugar único para disfrutar de la tranquilidad en contacto con la naturaleza.
                         </p>
                         <img src="./img/casa 5.jpg" alt="casa" class="favoritos__card-img">
                     </div>
@@ -309,9 +303,7 @@ session_start();
                     <div class="favoritos__card-textos">
                         <h3 class="favoritos__card-tittle">Propiedad popular</h3>
                         <p class="favoritos_card-parrafo">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur exercitationem eos
-                            quibusdam, tempore animi perspiciatis optio adipisci rerum maiores ullam, consequuntur
-                            consectetur. Tenetur eligendi unde praesentium inventore ducimus id veniam!
+                        Terreno fértil listo para cultivos, equipado con un sistema de riego moderno. Ideal para agricultura sostenible o plantaciones de gran escala. Ubicada cerca de una carretera principal para fácil acceso al transporte de mercancías.
                         </p>
                         <img src="./img/casa 6.jpg" alt="casa" class="favoritos__card-img">
                     </div>
@@ -320,9 +312,7 @@ session_start();
                     <div class="favoritos__card-textos">
                         <h3 class="favoritos__card-tittle">Propiedad popular</h3>
                         <p class="favoritos_card-parrafo">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur exercitationem eos
-                            quibusdam, tempore animi perspiciatis optio adipisci rerum maiores ullam, consequuntur
-                            consectetur. Tenetur eligendi unde praesentium inventore ducimus id veniam!
+                        Extensión de terreno con viñas maduras y equipamiento para la producción de vino. Perfecto para amantes de la viticultura o inversores en el sector. Ubicación ideal con un microclima favorable para una excelente cosecha.
                         </p>
                         <img src="./img/casa 7.jpg" alt="casa" class="favoritos__card-img">
                     </div>
@@ -331,9 +321,7 @@ session_start();
                     <div class="favoritos__card-textos">
                         <h3 class="favoritos__card-tittle">Propiedad popular</h3>
                         <p class="favoritos_card-parrafo">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur exercitationem eos
-                            quibusdam, tempore animi perspiciatis optio adipisci rerum maiores ullam, consequuntur
-                            consectetur. Tenetur eligendi unde praesentium inventore ducimus id veniam!
+                        Propiedad arbolada con senderos naturales ideales para caminatas y actividades al aire libre. Un refugio de naturaleza con flora y fauna autóctona. Perfecto para conservar o disfrutar como espacio recreativo.
                         </p>
                         <img src="./img/casa 8.jpg" alt="casa" class="favoritos__card-img">
                     </div>

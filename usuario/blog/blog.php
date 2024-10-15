@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/Modulo_inicio.css">
+    <link rel="shortcut icon" href="../img/iconos/blog.png" type="image/x-icon">
     <title>Blog</title>
 </head>
 <?php
